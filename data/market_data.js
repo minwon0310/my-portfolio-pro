@@ -1,7 +1,7 @@
 window.INITIAL_MARKET_DATA = {
-  "last_updated": "2026-10-27 09:44:35",
+  "last_updated": "2026-10-27 00:59:03",
   "market_date": "2026-10-26",
-  "usdkrw": 1324.58,
+  "usdkrw": 1323.18,
   "summary": {
     "total_assets_usd": 16919.66,
     "total_equity_usd": 15925.36,
@@ -4421,7 +4421,7 @@ window.INITIAL_MARKET_DATA = {
           45.0,
           80.05,
           63.98,
-          66.01,
+          66.0,
           72.57,
           63.64,
           62.3,

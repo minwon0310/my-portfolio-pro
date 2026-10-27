@@ -814,10 +814,12 @@
       document.getElementById('pval-YTM').textContent = fmtPct(ytm, 1);
 
       // Period cards (1D, 1M, 3M, YTD, 1Y)
+      const isKrw = currency === 'KRW';
       const periods = ['1D', '1M', '3M', 'YTD', '1Y'];
       periods.forEach(p => {
         const pData = marketData.periods[p];
-        const ret = pData ? pData.portfolio_metrics.total_return_pct : 0;
+        const pm = pData ? (isKrw && pData.portfolio_metrics_krw ? pData.portfolio_metrics_krw : pData.portfolio_metrics) : null;
+        const ret = pm ? pm.total_return_pct : 0;
         const valEl = document.getElementById('pval-' + p);
         const cardEl = document.getElementById('pcard-' + p);
         if (valEl) {
@@ -834,18 +836,22 @@
       });
 
       const curPData = marketData.periods[selectedPeriod];
-      const curRetPct = curPData.portfolio_metrics.total_return_pct;
+      const curPm = isKrw && curPData.portfolio_metrics_krw ? curPData.portfolio_metrics_krw : curPData.portfolio_metrics;
+      const curRetPct = curPm.total_return_pct;
       // Scale period profit by account filter ratio
       const scaleRatio = marketData.summary.total_assets_usd > 0 ? (totalUsd / marketData.summary.total_assets_usd) : 1;
-      const curProfitUsd = curPData.portfolio_metrics.profit_usd * scaleRatio;
+      const periodProfitDisplay = isKrw && curPm.profit_krw !== undefined
+        ? (curPm.profit_krw >= 0 ? '+₩' : '-₩') + Math.round(Math.abs(curPm.profit_krw * scaleRatio)).toLocaleString('ko-KR')
+        : fmtSignedMoney(curPm.profit_usd * scaleRatio);
 
       const periodNames = { '1D': '일간', '1M': '최근 1개월', '3M': '최근 1분기(3M)', 'YTD': '연초대비(YTD)', '1Y': '최근 1년(1Y)' };
+      const basisLabel = isKrw ? '원화(환율반영)' : '달러($)';
       const badgeEl = document.getElementById('periodReturnBadge');
-      badgeEl.textContent = `${periodNames[selectedPeriod]} ${fmtPct(curRetPct)}`;
+      badgeEl.textContent = `${periodNames[selectedPeriod]} ${fmtPct(curRetPct)} (${basisLabel})`;
       badgeEl.className = `px-2.5 py-1 rounded-lg text-xs font-bold ${curRetPct >= 0 ? 'gain-bg' : 'loss-bg'}`;
 
       document.getElementById('periodProfitText').textContent =
-        `${periodNames[selectedPeriod]} ${fmtSignedMoney(curProfitUsd)}`;
+        `${periodNames[selectedPeriod]} ${periodProfitDisplay}`;
       document.getElementById('costProfitText').textContent =
         `평단대비 ${fmtSignedMoney(totalProfitUsd)} (${fmtPct(totalProfitPct, 1)})`;
 
@@ -863,8 +869,13 @@
       const ctx = document.getElementById('homeWealthChart').getContext('2d');
       if (homeWealthChartInst) homeWealthChartInst.destroy();
 
-      const fx = currency === 'KRW' ? marketData.usdkrw : 1;
-      const values = pData.portfolio_values_usd.map(v => Number((v * scaleRatio * fx).toFixed(currency === 'KRW' ? 0 : 2)));
+      let values;
+      if (currency === 'KRW' && pData.portfolio_values_krw) {
+        values = pData.portfolio_values_krw.map(v => Math.round(v * scaleRatio));
+      } else {
+        const fx = currency === 'KRW' ? marketData.usdkrw : 1;
+        values = pData.portfolio_values_usd.map(v => Number((v * scaleRatio * fx).toFixed(currency === 'KRW' ? 0 : 2)));
+      }
       const isPositive = values[values.length - 1] >= values[0];
       const lineColor = isPositive ? '#34d399' : '#fb7185';
 
@@ -1215,6 +1226,13 @@
     function renderCompareTab() {
       const pKey = selectedPeriod === '1D' ? '1Y' : selectedPeriod;
       const pData = marketData.periods[pKey];
+      const isKrw = currency === 'KRW';
+
+      const portSeries = isKrw && pData.portfolio_return_series_krw ? pData.portfolio_return_series_krw : pData.portfolio_return_series;
+      const portMetrics = isKrw && pData.portfolio_metrics_krw ? pData.portfolio_metrics_krw : pData.portfolio_metrics;
+      const benchSeriesMap = isKrw && pData.benchmark_series_krw ? pData.benchmark_series_krw : pData.benchmark_series;
+      const benchMetricsMap = isKrw && pData.benchmark_metrics_krw ? pData.benchmark_metrics_krw : pData.benchmark_metrics;
+      const basisTag = isKrw ? '₩ 원화환산 기준' : '$ 달러환산 기준';
 
       // Update period buttons in compare tab
       document.querySelectorAll('.cmp-pbtn').forEach(btn => {
@@ -1229,7 +1247,7 @@
       const toggleContainer = document.getElementById('benchmarkToggleContainer');
       toggleContainer.innerHTML = marketData.benchmarks.map(b => {
         const isOn = activeBenchmarks[b.id];
-        const bRet = pData.benchmark_metrics[b.id] ? pData.benchmark_metrics[b.id].total_return_pct : 0;
+        const bRet = benchMetricsMap[b.id] ? benchMetricsMap[b.id].total_return_pct : 0;
         return `
           <button onclick="toggleBenchmark('${b.id}')"
             class="px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 border transition ${
@@ -1247,8 +1265,8 @@
       if (benchmarkCompareChartInst) benchmarkCompareChartInst.destroy();
 
       const datasets = [{
-        label: '내 포트폴리오',
-        data: pData.portfolio_return_series,
+        label: `내 포트폴리오 (${basisTag})`,
+        data: portSeries,
         borderColor: '#38bdf8',
         backgroundColor: 'rgba(56, 189, 248, 0.1)',
         borderWidth: 3,
@@ -1257,10 +1275,10 @@
       }];
 
       marketData.benchmarks.forEach(b => {
-        if (activeBenchmarks[b.id] && pData.benchmark_series[b.id]) {
+        if (activeBenchmarks[b.id] && benchSeriesMap[b.id]) {
           datasets.push({
             label: b.name,
-            data: pData.benchmark_series[b.id],
+            data: benchSeriesMap[b.id],
             borderColor: b.color,
             borderWidth: 1.8,
             pointRadius: 0,
@@ -1299,7 +1317,7 @@
       });
 
       // Populate My Portfolio Quant Metric Cards
-      const pm = pData.portfolio_metrics;
+      const pm = portMetrics;
       document.getElementById('mySharpeVal').textContent = pm.sharpe.toFixed(2);
       document.getElementById('mySharpeEval').textContent =
         pm.sharpe >= 1.5 ? '매우 우수 (초과수익 탁월)' : (pm.sharpe >= 1.0 ? '우수 (양호한 위험대비 수익)' : '보통');
@@ -1316,10 +1334,10 @@
       const sortinoArr = [pm.sortino];
 
       marketData.benchmarks.forEach(b => {
-        if (activeBenchmarks[b.id] && pData.benchmark_metrics[b.id]) {
+        if (activeBenchmarks[b.id] && benchMetricsMap[b.id]) {
           barLabels.push(b.name.split(' ')[0]);
-          sharpeArr.push(pData.benchmark_metrics[b.id].sharpe);
-          sortinoArr.push(pData.benchmark_metrics[b.id].sortino);
+          sharpeArr.push(benchMetricsMap[b.id].sharpe);
+          sortinoArr.push(benchMetricsMap[b.id].sortino);
         }
       });
 
@@ -1350,11 +1368,11 @@
 
       // Detailed Table
       const rows = [
-        { name: '⭐ 내 포트폴리오', color: '#38bdf8', m: pm, isMine: true }
+        { name: `⭐ 내 포트폴리오 (${isKrw ? '원화' : '달러'})`, color: '#38bdf8', m: pm, isMine: true }
       ];
       marketData.benchmarks.forEach(b => {
-        if (activeBenchmarks[b.id] && pData.benchmark_metrics[b.id]) {
-          rows.push({ name: b.name, color: b.color, m: pData.benchmark_metrics[b.id], isMine: false });
+        if (activeBenchmarks[b.id] && benchMetricsMap[b.id]) {
+          rows.push({ name: b.name, color: b.color, m: benchMetricsMap[b.id], isMine: false });
         }
       });
 

@@ -1,0 +1,43 @@
+name: Daily Portfolio & Dividend Update (08:00 KST)
+
+on:
+  schedule:
+    # Runs every day at 23:00 UTC == 08:00 AM KST (Korea Standard Time)
+    - cron: '0 23 * * *'
+  workflow_dispatch: # Allows manual 1-click trigger from GitHub mobile app / web
+  push:
+    branches: [ main, master ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install yfinance pandas numpy
+
+      - name: Fetch latest stock, dividend & benchmark data
+        run: |
+          python update_market_data.py
+
+      - name: Commit and push updated market data
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/market_data.json data/market_data.js
+          git diff --staged --quiet || git commit -m "chore: auto-update market & dividend data ($(date +'%Y-%m-%d %H:%M'))"
+          git push

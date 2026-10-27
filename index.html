@@ -165,7 +165,15 @@
         </div>
 
         <!-- Home Wealth Trend Chart -->
-        <div class="mt-4 h-48">
+        <div class="mt-4 flex items-center justify-between text-[11px] text-slate-400 px-1">
+          <span>실제 거래(매수·매도·환전입금) 반영 자산 추이</span>
+          <div class="flex items-center gap-2.5">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>매수</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-400 inline-block"></span>매도</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400 inline-block"></span>환전입금</span>
+          </div>
+        </div>
+        <div class="mt-1.5 h-52">
           <canvas id="homeWealthChart"></canvas>
         </div>
 
@@ -307,17 +315,24 @@
     <section id="tab-compare" class="space-y-4 hidden">
       <!-- Period Selector & Benchmark ON/OFF Switches -->
       <div class="glass-card p-5">
-        <div class="flex items-center justify-between mb-3">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
           <div>
-            <h3 class="text-sm font-bold text-white">벤치마크 수익률 비교 (ON/OFF)</h3>
-            <p class="text-[11px] text-slate-400">내 포트폴리오와 주요 자산을 켜고 끄며 직관적으로 비교하세요</p>
+            <h3 class="text-sm font-bold text-white">Index 지수화(100) & 수익률(%) 벤치마크 비교</h3>
+            <p class="text-[11px] text-slate-400">입출금 왜곡을 제거한 순수 투자성과 지수(TWR Index=100)로 주요 지수와 비교합니다</p>
           </div>
-          <!-- Period selector inside compare tab -->
-          <div class="flex bg-slate-900 p-0.5 rounded-lg border border-white/10 text-[11px]">
-            <button onclick="selectPeriod('1M')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="1M">1M</button>
-            <button onclick="selectPeriod('3M')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="3M">3M</button>
-            <button onclick="selectPeriod('YTD')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="YTD">YTD</button>
-            <button onclick="selectPeriod('1Y')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="1Y">1Y</button>
+          <div class="flex items-center gap-1.5">
+            <!-- Index(100) vs Return(%) mode toggle -->
+            <div class="flex bg-slate-900 p-0.5 rounded-lg border border-cyan-500/30 text-[11px]">
+              <button onclick="setCompareChartMode('INDEX')" id="cmode-INDEX" class="px-2 py-1 rounded-md font-bold bg-cyan-600 text-white transition">Index (100기준)</button>
+              <button onclick="setCompareChartMode('PCT')" id="cmode-PCT" class="px-2 py-1 rounded-md font-semibold text-slate-400 hover:text-white transition">수익률 (%)</button>
+            </div>
+            <!-- Period selector inside compare tab -->
+            <div class="flex bg-slate-900 p-0.5 rounded-lg border border-white/10 text-[11px]">
+              <button onclick="selectPeriod('1M')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="1M">1M</button>
+              <button onclick="selectPeriod('3M')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="3M">3M</button>
+              <button onclick="selectPeriod('YTD')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="YTD">YTD</button>
+              <button onclick="selectPeriod('1Y')" class="cmp-pbtn px-2 py-1 rounded-md font-semibold" data-p="1Y">1Y</button>
+            </div>
           </div>
         </div>
 
@@ -412,7 +427,48 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 4: 자산 편집 & 모바일 연결 (SETTINGS) ==================== -->
+    <!-- ==================== TAB 4: 거래내역서 (TRANSACTIONS) ==================== -->
+    <section id="tab-transactions" class="space-y-4 hidden">
+      <div class="glass-card p-5">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <div>
+            <h3 class="text-sm font-bold text-white">NH투자증권 · 토스증권 통합 거래내역서</h3>
+            <p class="text-[11px] text-slate-400">증명서 기반 실제 매수 · 매도 · 외화환전 입금 · 배당금 입금 타임라인</p>
+          </div>
+          <!-- Filter by type -->
+          <div class="flex bg-slate-900 p-0.5 rounded-lg border border-white/10 text-[11px]">
+            <button onclick="setTxFilter('ALL')" id="txf-ALL" class="px-2.5 py-1 rounded-md font-bold bg-blue-600 text-white transition">전체</button>
+            <button onclick="setTxFilter('BUY')" id="txf-BUY" class="px-2.5 py-1 rounded-md font-medium text-slate-400 transition">매수</button>
+            <button onclick="setTxFilter('SELL')" id="txf-SELL" class="px-2.5 py-1 rounded-md font-medium text-slate-400 transition">매도</button>
+            <button onclick="setTxFilter('DEPOSIT')" id="txf-DEPOSIT" class="px-2.5 py-1 rounded-md font-medium text-slate-400 transition">환전입금</button>
+            <button onclick="setTxFilter('DIV')" id="txf-DIV" class="px-2.5 py-1 rounded-md font-medium text-slate-400 transition">배당</button>
+          </div>
+        </div>
+
+        <!-- Summary Stats Row -->
+        <div class="grid grid-cols-3 gap-2.5 mb-4">
+          <div class="bg-slate-900/70 p-3 rounded-xl border border-emerald-500/20">
+            <div class="text-[10px] text-slate-400">누적 총 매수액</div>
+            <div id="txSumBuyVal" class="text-sm font-extrabold text-emerald-400 mt-0.5">₩0</div>
+            <div id="txSumBuyCnt" class="text-[10px] text-slate-500">0건</div>
+          </div>
+          <div class="bg-slate-900/70 p-3 rounded-xl border border-rose-500/20">
+            <div class="text-[10px] text-slate-400">누적 총 매도액</div>
+            <div id="txSumSellVal" class="text-sm font-extrabold text-rose-400 mt-0.5">₩0</div>
+            <div id="txSumSellCnt" class="text-[10px] text-slate-500">0건</div>
+          </div>
+          <div class="bg-slate-900/70 p-3 rounded-xl border border-amber-500/20">
+            <div class="text-[10px] text-slate-400">외화환전 순입금</div>
+            <div id="txSumDepVal" class="text-sm font-extrabold text-amber-300 mt-0.5">₩0</div>
+            <div id="txSumDepCnt" class="text-[10px] text-slate-500">0건</div>
+          </div>
+        </div>
+
+        <div id="transactionsListContainer" class="space-y-2 max-h-[540px] overflow-y-auto pr-1 text-xs"></div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 5: 자산 편집 & 모바일 연결 (SETTINGS) ==================== -->
     <section id="tab-settings" class="space-y-4 hidden">
       <!-- Mobile Access & PWA Guide Card -->
       <div class="glass-card p-5 border-blue-500/30">
@@ -524,35 +580,42 @@
 
   </main>
 
-  <!-- Bottom Navigation Bar (Mobile App Style) -->
+  <!-- Bottom Navigation Bar (Mobile App Style - 5 Tabs) -->
   <nav class="fixed bottom-0 left-0 right-0 z-40 glass-nav pb-safe">
-    <div class="max-w-xl mx-auto grid grid-cols-4 h-16">
+    <div class="max-w-xl mx-auto grid grid-cols-5 h-16">
       <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center justify-center gap-1 text-blue-400">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
-        <span class="text-[11px] font-bold">자산·비중</span>
+        <span class="text-[10px] font-bold">자산·비중</span>
       </button>
 
       <button onclick="switchTab('dividends')" id="nav-dividends" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-400">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span class="text-[11px] font-medium">배당연구소</span>
+        <span class="text-[10px] font-medium">배당연구소</span>
       </button>
 
       <button onclick="switchTab('compare')" id="nav-compare" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-400">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
-        <span class="text-[11px] font-medium">비교·샤프지수</span>
+        <span class="text-[10px] font-medium">비교·샤프지수</span>
+      </button>
+
+      <button onclick="switchTab('transactions')" id="nav-transactions" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-400">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        <span class="text-[10px] font-medium">거래내역</span>
       </button>
 
       <button onclick="switchTab('settings')" id="nav-settings" class="nav-btn flex flex-col items-center justify-center gap-1 text-slate-400">
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
         </svg>
-        <span class="text-[11px] font-medium">관리·모바일</span>
+        <span class="text-[10px] font-medium">관리·모바일</span>
       </button>
     </div>
   </nav>
@@ -580,6 +643,8 @@
     let accountFilter = 'ALL'; // 'ALL', 'NH투자증권', '토스증권'
     let selectedPeriod = '1Y'; // '1D', '1M', '3M', 'YTD', '1Y'
     let pieMode = 'ticker'; // 'ticker', 'sector', 'account'
+    let compareChartMode = 'INDEX'; // 'INDEX' (Base 100) or 'PCT' (% Return)
+    let txTypeFilter = 'ALL'; // 'ALL', 'BUY', 'SELL', 'DEPOSIT', 'DIV'
 
     // Active Benchmarks (Toggle ON/OFF)
     let activeBenchmarks = {
@@ -703,20 +768,50 @@
 
     function switchTab(tabId) {
       currentTab = tabId;
-      ['home', 'dividends', 'compare', 'settings'].forEach(t => {
+      ['home', 'dividends', 'compare', 'transactions', 'settings'].forEach(t => {
         const sec = document.getElementById('tab-' + t);
         const nav = document.getElementById('nav-' + t);
         if (t === tabId) {
-          sec.classList.remove('hidden');
-          nav.classList.remove('text-slate-400');
-          nav.classList.add('text-blue-400');
+          if (sec) sec.classList.remove('hidden');
+          if (nav) {
+            nav.classList.remove('text-slate-400');
+            nav.classList.add('text-blue-400');
+          }
         } else {
-          sec.classList.add('hidden');
-          nav.classList.remove('text-blue-400');
-          nav.classList.add('text-slate-400');
+          if (sec) sec.classList.add('hidden');
+          if (nav) {
+            nav.classList.remove('text-blue-400');
+            nav.classList.add('text-slate-400');
+          }
         }
       });
       renderAll();
+    }
+
+    function setCompareChartMode(mode) {
+      compareChartMode = mode;
+      ['INDEX', 'PCT'].forEach(m => {
+        const btn = document.getElementById('cmode-' + m);
+        if (btn) {
+          btn.className = m === mode
+            ? 'px-2 py-1 rounded-md font-bold bg-cyan-600 text-white transition'
+            : 'px-2 py-1 rounded-md font-semibold text-slate-400 hover:text-white transition';
+        }
+      });
+      renderCompareTab();
+    }
+
+    function setTxFilter(flt) {
+      txTypeFilter = flt;
+      ['ALL', 'BUY', 'SELL', 'DEPOSIT', 'DIV'].forEach(f => {
+        const btn = document.getElementById('txf-' + f);
+        if (btn) {
+          btn.className = f === flt
+            ? 'px-2.5 py-1 rounded-md font-bold bg-blue-600 text-white transition'
+            : 'px-2.5 py-1 rounded-md font-medium text-slate-400 transition';
+        }
+      });
+      renderTransactionsTab();
     }
 
     function setAccountFilter(acc) {
@@ -781,6 +876,7 @@
       renderHomeTab();
       renderDividendsTab();
       renderCompareTab();
+      renderTransactionsTab();
       renderSettingsTab();
     }
 
@@ -883,6 +979,16 @@
       grad.addColorStop(0, isPositive ? 'rgba(52, 211, 153, 0.28)' : 'rgba(251, 113, 133, 0.28)');
       grad.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
 
+      const markers = pData.trade_markers || [];
+      const pointRadii = values.map((_, i) => (markers[i] && markers[i].length > 0) ? 4.5 : 0);
+      const pointColors = values.map((_, i) => {
+        const evs = markers[i] || [];
+        if (evs.length === 0) return lineColor;
+        if (evs.some(e => e.type === 'BUY')) return '#34d399';
+        if (evs.some(e => e.type === 'SELL')) return '#fb7185';
+        return '#fbbf24';
+      });
+
       homeWealthChartInst = new Chart(ctx, {
         type: 'line',
         data: {
@@ -894,9 +1000,12 @@
             backgroundColor: grad,
             borderWidth: 2.5,
             fill: true,
-            pointRadius: 0,
-            pointHoverRadius: 4,
-            tension: 0.25
+            pointRadius: pointRadii,
+            pointBackgroundColor: pointColors,
+            pointBorderColor: '#0f172a',
+            pointBorderWidth: 1.5,
+            pointHoverRadius: 6,
+            tension: 0.2
           }]
         },
         options: {
@@ -911,8 +1020,19 @@
               borderWidth: 1,
               callbacks: {
                 label: (ctx) => currency === 'KRW'
-                  ? ` ₩${Math.round(ctx.parsed.y).toLocaleString('ko-KR')}`
-                  : ` $${ctx.parsed.y.toLocaleString('en-US', { minimumFractionDigits: 2 })}`
+                  ? ` 총자산: ₩${Math.round(ctx.parsed.y).toLocaleString('ko-KR')}`
+                  : ` 총자산: $${ctx.parsed.y.toLocaleString('en-US', { minimumFractionDigits: 2 })}`,
+                afterBody: (items) => {
+                  const idx = items[0].dataIndex;
+                  const evs = markers[idx] || [];
+                  if (evs.length === 0) return [];
+                  return evs.map(e => {
+                    if (e.type === 'BUY') return `🟢 [매수] ${e.ticker} ${e.shares}주 ($${Number(e.amount_usd).toFixed(1)})`;
+                    if (e.type === 'SELL') return `🔴 [매도] ${e.ticker} ${e.shares}주 ($${Number(e.amount_usd).toFixed(1)})`;
+                    if (e.type === 'DEPOSIT') return `🟡 [환전입금] +$${Number(e.amount_usd).toFixed(1)}`;
+                    return '';
+                  });
+                }
               }
             }
           },
@@ -1227,12 +1347,21 @@
       const pKey = selectedPeriod === '1D' ? '1Y' : selectedPeriod;
       const pData = marketData.periods[pKey];
       const isKrw = currency === 'KRW';
+      const isIndexMode = compareChartMode === 'INDEX';
 
-      const portSeries = isKrw && pData.portfolio_return_series_krw ? pData.portfolio_return_series_krw : pData.portfolio_return_series;
+      let portSeries;
+      let benchSeriesMap;
+      if (isIndexMode) {
+        portSeries = isKrw && pData.portfolio_index_krw ? pData.portfolio_index_krw : (pData.portfolio_index_usd || pData.portfolio_return_series.map(v => Number((100 + v).toFixed(2))));
+        benchSeriesMap = isKrw && pData.benchmark_index_krw ? pData.benchmark_index_krw : (pData.benchmark_index_usd || {});
+      } else {
+        portSeries = isKrw && pData.portfolio_return_series_krw ? pData.portfolio_return_series_krw : pData.portfolio_return_series;
+        benchSeriesMap = isKrw && pData.benchmark_series_krw ? pData.benchmark_series_krw : pData.benchmark_series;
+      }
+
       const portMetrics = isKrw && pData.portfolio_metrics_krw ? pData.portfolio_metrics_krw : pData.portfolio_metrics;
-      const benchSeriesMap = isKrw && pData.benchmark_series_krw ? pData.benchmark_series_krw : pData.benchmark_series;
       const benchMetricsMap = isKrw && pData.benchmark_metrics_krw ? pData.benchmark_metrics_krw : pData.benchmark_metrics;
-      const basisTag = isKrw ? '₩ 원화환산 기준' : '$ 달러환산 기준';
+      const basisTag = isKrw ? '₩ 원화환산' : '$ 달러환산';
 
       // Update period buttons in compare tab
       document.querySelectorAll('.cmp-pbtn').forEach(btn => {
@@ -1248,6 +1377,7 @@
       toggleContainer.innerHTML = marketData.benchmarks.map(b => {
         const isOn = activeBenchmarks[b.id];
         const bRet = benchMetricsMap[b.id] ? benchMetricsMap[b.id].total_return_pct : 0;
+        const bIdxVal = (100 + bRet).toFixed(1);
         return `
           <button onclick="toggleBenchmark('${b.id}')"
             class="px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 border transition ${
@@ -1255,7 +1385,7 @@
             }">
             <span class="w-2.5 h-2.5 rounded-full" style="background:${isOn ? b.color : '#475569'}"></span>
             <span>${b.name}</span>
-            <span class="${isOn ? colorClass(bRet) : 'text-slate-500'}">${fmtPct(bRet, 1)}</span>
+            <span class="${isOn ? colorClass(bRet) : 'text-slate-500'}">${isIndexMode ? bIdxVal + 'pt (' + fmtPct(bRet, 1) + ')' : fmtPct(bRet, 1)}</span>
           </button>
         `;
       }).join('');
@@ -1302,7 +1432,9 @@
             tooltip: {
               backgroundColor: 'rgba(15, 23, 42, 0.95)',
               callbacks: {
-                label: (c) => ` ${c.dataset.label}: ${fmtPct(c.parsed.y)}`
+                label: (c) => isIndexMode
+                  ? ` ${c.dataset.label}: ${c.parsed.y.toFixed(2)}pt (${fmtPct(c.parsed.y - 100)})`
+                  : ` ${c.dataset.label}: ${fmtPct(c.parsed.y)}`
               }
             }
           },
@@ -1310,7 +1442,11 @@
             x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 }, maxTicksLimit: 6 } },
             y: {
               grid: { color: 'rgba(255,255,255,0.05)' },
-              ticks: { color: '#64748b', font: { size: 10 }, callback: (v) => v + '%' }
+              ticks: {
+                color: '#64748b',
+                font: { size: 10 },
+                callback: (v) => isIndexMode ? v + 'pt' : v + '%'
+              }
             }
           }
         }
@@ -1393,7 +1529,98 @@
       `).join('');
     }
 
-    // ==================== RENDER TAB 4: SETTINGS & EDITOR ====================
+    // ==================== RENDER TAB 4: TRANSACTIONS LEDGER ====================
+    function renderTransactionsTab() {
+      const txList = marketData.transactions || [];
+      const divList = (marketData.actual_dividend_history || []).map(d => ({
+        date: d.date,
+        account: d.account,
+        type: 'DIV',
+        ticker: d.ticker,
+        name: d.name,
+        shares: 0,
+        price_usd: 0,
+        amount_usd: d.amount_usd,
+        fx: d.fx,
+        note: '외화배당금 입금'
+      }));
+
+      let combined = [...txList, ...divList];
+      if (accountFilter !== 'ALL') {
+        combined = combined.filter(x => x.account === accountFilter);
+      }
+
+      // Compute summary totals before type filter
+      const buyItems = combined.filter(x => x.type === 'BUY');
+      const sellItems = combined.filter(x => x.type === 'SELL');
+      const depItems = combined.filter(x => x.type === 'DEPOSIT');
+
+      const sumBuyUsd = buyItems.reduce((s, x) => s + Number(x.amount_usd || 0), 0);
+      const sumSellUsd = sellItems.reduce((s, x) => s + Number(x.amount_usd || 0), 0);
+      const sumDepUsd = depItems.reduce((s, x) => s + Number(x.amount_usd || 0), 0);
+
+      document.getElementById('txSumBuyVal').textContent = fmtMoney(sumBuyUsd);
+      document.getElementById('txSumBuyCnt').textContent = `총 ${buyItems.length}건 체결`;
+      document.getElementById('txSumSellVal').textContent = fmtMoney(sumSellUsd);
+      document.getElementById('txSumSellCnt').textContent = `총 ${sellItems.length}건 체결`;
+      document.getElementById('txSumDepVal').textContent = fmtMoney(sumDepUsd);
+      document.getElementById('txSumDepCnt').textContent = `총 ${depItems.length}건 환전`;
+
+      if (txTypeFilter !== 'ALL') {
+        combined = combined.filter(x => x.type === txTypeFilter);
+      }
+
+      combined.sort((a, b) => b.date.localeCompare(a.date));
+
+      const container = document.getElementById('transactionsListContainer');
+      if (!container) return;
+
+      const typeBadgeMap = {
+        'BUY': { label: '매수', cls: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' },
+        'SELL': { label: '매도', cls: 'bg-rose-500/20 text-rose-300 border-rose-500/30' },
+        'DEPOSIT': { label: '환전입금', cls: 'bg-amber-500/20 text-amber-300 border-amber-500/30' },
+        'DIV': { label: '배당입금', cls: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' },
+        'SPLIT': { label: '액면분할', cls: 'bg-purple-500/20 text-purple-300 border-purple-500/30' }
+      };
+
+      container.innerHTML = combined.map(item => {
+        const tb = typeBadgeMap[item.type] || { label: item.type, cls: 'bg-slate-700 text-slate-300' };
+        const isNH = item.account === 'NH투자증권';
+        const accCls = isNH ? 'text-blue-400' : 'text-cyan-400';
+        const krwVal = Math.round(Number(item.amount_usd || 0) * Number(item.fx || marketData.usdkrw));
+        const primaryAmt = currency === 'KRW'
+          ? `₩${krwVal.toLocaleString('ko-KR')}`
+          : `$${Number(item.amount_usd || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        const subAmt = currency === 'KRW'
+          ? `$${Number(item.amount_usd || 0).toFixed(2)} (적용환율 ${Number(item.fx || 1380).toLocaleString()}원)`
+          : `₩${krwVal.toLocaleString('ko-KR')} (환율 ${Number(item.fx || 1380).toLocaleString()}원)`;
+
+        const detailLine = item.shares > 0
+          ? `${Number(item.shares).toLocaleString('en-US', { maximumFractionDigits: 6 })}주 · 체결단가 $${Number(item.price_usd).toFixed(2)} · ${item.note || ''}`
+          : `${item.note || ''}`;
+
+        return `
+          <div class="p-3 rounded-xl bg-slate-900/75 border border-white/5 flex items-center justify-between gap-2">
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-mono text-slate-400">${item.date}</span>
+                <span class="text-[10px] font-bold ${accCls}">${item.account}</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded border font-bold ${tb.cls}">${tb.label}</span>
+                <span class="font-extrabold text-white">${item.ticker}</span>
+                <span class="text-slate-300 truncate">${item.name}</span>
+              </div>
+              <div class="text-[11px] text-slate-400 mt-1 truncate">${detailLine}</div>
+            </div>
+            <div class="text-right shrink-0">
+              <div class="font-extrabold text-white">${primaryAmt}</div>
+              <div class="text-[10px] text-slate-400">${subAmt}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ==================== RENDER TAB 5: SETTINGS & EDITOR ====================
     function renderSettingsTab() {
       const nhAcc = marketData.accounts.find(a => a.name === 'NH투자증권');
       const tossAcc = marketData.accounts.find(a => a.name === '토스증권');
@@ -1501,6 +1728,8 @@
           category: h.category,
           sector: h.sector
         })),
+        actual_dividend_history: marketData.actual_dividend_history || [],
+        transactions: marketData.transactions || [],
         benchmarks: marketData.benchmarks
       };
 

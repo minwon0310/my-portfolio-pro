@@ -7,18 +7,18 @@
       "name": "NH투자증권",
       "account_no": "207-01-88***7",
       "color": "#3b82f6",
-      "cash_usd": 53.68,
+      "cash_usd": 0.0,
       "cash_krw": 584,
-      "cash_note": "배당금 누적 대기 자금 ($53.68 + 원화 584원)"
+      "cash_note": "예수금 .68 SGOV 매수 완료"
     },
     {
       "id": "toss",
       "name": "토스증권",
       "account_no": "188-01-072149",
       "color": "#06b6d4",
-      "cash_usd": 940.62,
+      "cash_usd": 0.0,
       "cash_krw": 0,
-      "cash_note": "외화 예수금 $940.62 (원화 환산 약 126만 원)"
+      "cash_note": "예수금 .62 전액 SGOV 매수 완료"
     }
   ],
   "holdings": [
@@ -161,6 +161,26 @@
       "avg_price": 121.92,
       "category": "AI 네트워크 인프라 성장주",
       "sector": "AI / 반도체"
+    },
+    {
+      "id": "nh-sgov",
+      "account": "NH투자증권",
+      "ticker": "SGOV",
+      "name_ko": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 0.533227,
+      "avg_price": 100.67,
+      "category": "초단기 국채 파킹 (월배당 현금성 자산)",
+      "sector": "단기국채 / 현금성 ETF"
+    },
+    {
+      "id": "toss-sgov",
+      "account": "토스증권",
+      "ticker": "SGOV",
+      "name_ko": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 9.343598,
+      "avg_price": 100.67,
+      "category": "초단기 국채 파킹 (월배당 현금성 자산)",
+      "sector": "단기국채 / 현금성 ETF"
     }
   ],
   "actual_dividend_history": [
@@ -2389,6 +2409,30 @@
       "amount_usd": 192.3,
       "fx": 1337.9,
       "note": "수익실현 전량 매도"
+    },
+    {
+      "date": "2026-10-20",
+      "account": "NH투자증권",
+      "type": "BUY",
+      "ticker": "SGOV",
+      "name": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 0.533227,
+      "price_usd": 100.67,
+      "amount_usd": 53.68,
+      "fx": 1360.0,
+      "note": "남은 외화예수금 .68 전액 SGOV 매수"
+    },
+    {
+      "date": "2026-10-20",
+      "account": "토스증권",
+      "type": "BUY",
+      "ticker": "SGOV",
+      "name": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 9.343598,
+      "price_usd": 100.67,
+      "amount_usd": 940.62,
+      "fx": 1360.0,
+      "note": "남은 외화예수금 .62 전액 SGOV 매수"
     }
   ]
 }

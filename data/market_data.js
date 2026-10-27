@@ -1,18 +1,18 @@
 window.INITIAL_MARKET_DATA = {
-  "last_updated": "2026-10-27 01:31:52",
+  "last_updated": "2026-10-27 10:39:19",
   "market_date": "2026-10-26",
-  "usdkrw": 1324.68,
+  "usdkrw": 1323.28,
   "summary": {
-    "total_assets_usd": 16919.66,
-    "total_equity_usd": 15925.36,
-    "total_cash_usd": 994.3,
+    "total_assets_usd": 17050.61,
+    "total_equity_usd": 17050.61,
+    "total_cash_usd": 0.0,
     "total_cost_basis_usd": 14719.22,
-    "total_profit_usd": 2200.44,
-    "total_annual_dividend_usd": 118.32,
-    "monthly_avg_dividend_usd": 9.86,
-    "dividend_yield_total_pct": 0.7,
-    "dividend_yield_equity_pct": 0.74,
-    "estimated_ytm_pct": 14.77,
+    "total_profit_usd": 2331.38,
+    "total_annual_dividend_usd": 154.53,
+    "monthly_avg_dividend_usd": 12.88,
+    "dividend_yield_total_pct": 0.91,
+    "dividend_yield_equity_pct": 0.91,
+    "estimated_ytm_pct": 15.86,
     "actual_cumulative_dividend_usd": 178.87,
     "actual_2026_dividend_usd": 76.3
   },
@@ -22,18 +22,18 @@ window.INITIAL_MARKET_DATA = {
       "name": "NH투자증권",
       "account_no": "207-01-88***7",
       "color": "#3b82f6",
-      "cash_usd": 53.68,
+      "cash_usd": 0.0,
       "cash_krw": 584,
-      "cash_note": "배당금 누적 대기 자금 ($53.68 + 원화 584원)"
+      "cash_note": "예수금 .68 SGOV 매수 완료"
     },
     {
       "id": "toss",
       "name": "토스증권",
       "account_no": "188-01-072149",
       "color": "#06b6d4",
-      "cash_usd": 940.62,
+      "cash_usd": 0.0,
       "cash_krw": 0,
-      "cash_note": "외화 예수금 $940.62 (원화 환산 약 126만 원)"
+      "cash_note": "예수금 .62 전액 SGOV 매수 완료"
     }
   ],
   "holdings": [
@@ -46,20 +46,20 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 66.85,
       "category": "핵심 지수 코어 (S&P 500)",
       "sector": "지수 ETF (S&P 500)",
-      "current_price_usd": 89.45,
-      "market_value_usd": 3667.45,
+      "current_price_usd": 90.06,
+      "market_value_usd": 3692.46,
       "cost_basis_usd": 2740.85,
-      "profit_usd": 926.6,
-      "profit_pct": 33.81,
-      "weight_of_total_pct": 21.68,
-      "weight_of_equity_pct": 23.03,
+      "profit_usd": 951.61,
+      "profit_pct": 34.72,
+      "weight_of_total_pct": 21.66,
+      "weight_of_equity_pct": 21.66,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -2.47,
-      "change_3m_pct": -0.53,
-      "change_ytd_pct": 12.39,
-      "change_1y_pct": 11.65,
+      "change_1m_pct": -1.81,
+      "change_3m_pct": 0.15,
+      "change_ytd_pct": 13.16,
+      "change_1y_pct": 12.42,
       "dividend_per_share_usd": 0.91,
-      "dividend_yield_pct": 1.02,
+      "dividend_yield_pct": 1.01,
       "yield_on_cost_pct": 1.36,
       "annual_dividend_usd": 37.31,
       "dividend_frequency": "분기배당",
@@ -93,18 +93,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 246.96,
       "category": "핵심 지수 코어 (나스닥 100)",
       "sector": "지수 ETF (나스닥 100)",
-      "current_price_usd": 290.06,
-      "market_value_usd": 3480.72,
+      "current_price_usd": 293.26,
+      "market_value_usd": 3519.12,
       "cost_basis_usd": 2963.52,
-      "profit_usd": 517.2,
-      "profit_pct": 17.45,
-      "weight_of_total_pct": 20.57,
-      "weight_of_equity_pct": 21.86,
+      "profit_usd": 555.6,
+      "profit_pct": 18.75,
+      "weight_of_total_pct": 20.64,
+      "weight_of_equity_pct": 20.64,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -7.26,
-      "change_3m_pct": -0.87,
-      "change_ytd_pct": 15.1,
-      "change_1y_pct": 16.73,
+      "change_1m_pct": -6.23,
+      "change_3m_pct": 0.23,
+      "change_ytd_pct": 16.37,
+      "change_1y_pct": 18.02,
       "dividend_per_share_usd": 1.316,
       "dividend_yield_pct": 0.45,
       "yield_on_cost_pct": 0.53,
@@ -140,18 +140,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 27.16,
       "category": "배당 성장 코어",
       "sector": "배당 성장 ETF",
-      "current_price_usd": 35.27,
-      "market_value_usd": 564.32,
+      "current_price_usd": 35.3,
+      "market_value_usd": 564.8,
       "cost_basis_usd": 434.56,
-      "profit_usd": 129.76,
-      "profit_pct": 29.86,
-      "weight_of_total_pct": 3.34,
-      "weight_of_equity_pct": 3.54,
+      "profit_usd": 130.24,
+      "profit_pct": 29.97,
+      "weight_of_total_pct": 3.31,
+      "weight_of_equity_pct": 3.31,
       "change_1d_pct": 0.0,
-      "change_1m_pct": 7.37,
-      "change_3m_pct": 1.43,
-      "change_ytd_pct": 31.74,
-      "change_1y_pct": 14.5,
+      "change_1m_pct": 7.46,
+      "change_3m_pct": 1.52,
+      "change_ytd_pct": 31.86,
+      "change_1y_pct": 14.6,
       "dividend_per_share_usd": 1.055,
       "dividend_yield_pct": 2.99,
       "yield_on_cost_pct": 3.88,
@@ -187,20 +187,20 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 103.07,
       "category": "대형 성장주 코어",
       "sector": "성장주 ETF",
-      "current_price_usd": 136.48,
-      "market_value_usd": 409.44,
+      "current_price_usd": 137.95,
+      "market_value_usd": 413.85,
       "cost_basis_usd": 309.21,
-      "profit_usd": 100.23,
-      "profit_pct": 32.41,
-      "weight_of_total_pct": 2.42,
-      "weight_of_equity_pct": 2.57,
+      "profit_usd": 104.64,
+      "profit_pct": 33.84,
+      "weight_of_total_pct": 2.43,
+      "weight_of_equity_pct": 2.43,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -6.6,
-      "change_3m_pct": -1.45,
-      "change_ytd_pct": 11.03,
-      "change_1y_pct": 13.91,
+      "change_1m_pct": -5.59,
+      "change_3m_pct": -0.38,
+      "change_ytd_pct": 12.22,
+      "change_1y_pct": 15.14,
       "dividend_per_share_usd": 0.485,
-      "dividend_yield_pct": 0.36,
+      "dividend_yield_pct": 0.35,
       "yield_on_cost_pct": 0.47,
       "annual_dividend_usd": 1.46,
       "dividend_frequency": "분기배당",
@@ -234,18 +234,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 258.42,
       "category": "핵심 지수 코어 (나스닥 100)",
       "sector": "지수 ETF (나스닥 100)",
-      "current_price_usd": 290.06,
-      "market_value_usd": 3250.29,
+      "current_price_usd": 293.26,
+      "market_value_usd": 3286.15,
       "cost_basis_usd": 2895.75,
-      "profit_usd": 354.54,
-      "profit_pct": 12.24,
-      "weight_of_total_pct": 19.21,
-      "weight_of_equity_pct": 20.41,
+      "profit_usd": 390.4,
+      "profit_pct": 13.48,
+      "weight_of_total_pct": 19.27,
+      "weight_of_equity_pct": 19.27,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -7.26,
-      "change_3m_pct": -0.87,
-      "change_ytd_pct": 15.1,
-      "change_1y_pct": 16.73,
+      "change_1m_pct": -6.23,
+      "change_3m_pct": 0.23,
+      "change_ytd_pct": 16.37,
+      "change_1y_pct": 18.02,
       "dividend_per_share_usd": 1.316,
       "dividend_yield_pct": 0.45,
       "yield_on_cost_pct": 0.51,
@@ -281,20 +281,20 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 340.93,
       "category": "AI 반도체 핵심 성장주",
       "sector": "AI / 반도체",
-      "current_price_usd": 321.68,
-      "market_value_usd": 1021.01,
+      "current_price_usd": 329.17,
+      "market_value_usd": 1044.78,
       "cost_basis_usd": 1082.11,
-      "profit_usd": -61.1,
-      "profit_pct": -5.65,
-      "weight_of_total_pct": 6.03,
-      "weight_of_equity_pct": 6.41,
+      "profit_usd": -37.33,
+      "profit_pct": -3.45,
+      "weight_of_total_pct": 6.13,
+      "weight_of_equity_pct": 6.13,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -14.4,
-      "change_3m_pct": -9.37,
-      "change_ytd_pct": -6.54,
-      "change_1y_pct": -3.02,
+      "change_1m_pct": -12.41,
+      "change_3m_pct": -7.26,
+      "change_ytd_pct": -4.37,
+      "change_1y_pct": -0.76,
       "dividend_per_share_usd": 2.6,
-      "dividend_yield_pct": 0.81,
+      "dividend_yield_pct": 0.79,
       "yield_on_cost_pct": 0.76,
       "annual_dividend_usd": 8.25,
       "dividend_frequency": "분기배당",
@@ -328,18 +328,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 316.56,
       "category": "빅테크 핵심 성장주",
       "sector": "빅테크",
-      "current_price_usd": 320.21,
-      "market_value_usd": 887.03,
+      "current_price_usd": 316.8,
+      "market_value_usd": 877.58,
       "cost_basis_usd": 876.92,
-      "profit_usd": 10.11,
-      "profit_pct": 1.15,
-      "weight_of_total_pct": 5.24,
-      "weight_of_equity_pct": 5.57,
+      "profit_usd": 0.66,
+      "profit_pct": 0.08,
+      "weight_of_total_pct": 5.15,
+      "weight_of_equity_pct": 5.15,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -7.9,
-      "change_3m_pct": -6.31,
-      "change_ytd_pct": 2.5,
-      "change_1y_pct": 5.77,
+      "change_1m_pct": -8.88,
+      "change_3m_pct": -7.31,
+      "change_ytd_pct": 1.41,
+      "change_1y_pct": 4.64,
       "dividend_per_share_usd": 0.86,
       "dividend_yield_pct": 0.27,
       "yield_on_cost_pct": 0.27,
@@ -375,20 +375,20 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 395.07,
       "category": "빅테크 핵심 성장주",
       "sector": "빅테크",
-      "current_price_usd": 524.51,
-      "market_value_usd": 663.01,
+      "current_price_usd": 532.6,
+      "market_value_usd": 673.23,
       "cost_basis_usd": 499.39,
-      "profit_usd": 163.62,
-      "profit_pct": 32.76,
-      "weight_of_total_pct": 3.92,
-      "weight_of_equity_pct": 4.16,
+      "profit_usd": 173.84,
+      "profit_pct": 34.81,
+      "weight_of_total_pct": 3.95,
+      "weight_of_equity_pct": 3.95,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -0.9,
-      "change_3m_pct": 5.67,
-      "change_ytd_pct": 9.14,
-      "change_1y_pct": 32.09,
+      "change_1m_pct": 0.62,
+      "change_3m_pct": 7.3,
+      "change_ytd_pct": 10.83,
+      "change_1y_pct": 34.13,
       "dividend_per_share_usd": 3.64,
-      "dividend_yield_pct": 0.69,
+      "dividend_yield_pct": 0.68,
       "yield_on_cost_pct": 0.92,
       "annual_dividend_usd": 4.6,
       "dividend_frequency": "분기배당",
@@ -422,18 +422,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 198.86,
       "category": "헬스케어 서비스 성장주",
       "sector": "헬스케어",
-      "current_price_usd": 175.59,
-      "market_value_usd": 488.07,
+      "current_price_usd": 176.92,
+      "market_value_usd": 491.77,
       "cost_basis_usd": 552.75,
-      "profit_usd": -64.68,
-      "profit_pct": -11.7,
+      "profit_usd": -60.98,
+      "profit_pct": -11.03,
       "weight_of_total_pct": 2.88,
-      "weight_of_equity_pct": 3.06,
+      "weight_of_equity_pct": 2.88,
       "change_1d_pct": 0.0,
-      "change_1m_pct": 2.05,
-      "change_3m_pct": -2.75,
-      "change_ytd_pct": 0.91,
-      "change_1y_pct": -16.28,
+      "change_1m_pct": 2.82,
+      "change_3m_pct": -2.02,
+      "change_ytd_pct": 1.67,
+      "change_1y_pct": -15.64,
       "dividend_per_share_usd": 0.26,
       "dividend_yield_pct": 0.15,
       "yield_on_cost_pct": 0.13,
@@ -469,20 +469,20 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 65.88,
       "category": "산업용 리츠 (배당 및 자산가치)",
       "sector": "리츠 (REITs)",
-      "current_price_usd": 65.15,
-      "market_value_usd": 325.75,
+      "current_price_usd": 65.0,
+      "market_value_usd": 325.0,
       "cost_basis_usd": 329.4,
-      "profit_usd": -3.65,
-      "profit_pct": -1.11,
-      "weight_of_total_pct": 1.93,
-      "weight_of_equity_pct": 2.05,
+      "profit_usd": -4.4,
+      "profit_pct": -1.34,
+      "weight_of_total_pct": 1.91,
+      "weight_of_equity_pct": 1.91,
       "change_1d_pct": 0.0,
-      "change_1m_pct": 1.43,
-      "change_3m_pct": -2.74,
-      "change_ytd_pct": 13.79,
-      "change_1y_pct": 1.81,
+      "change_1m_pct": 1.2,
+      "change_3m_pct": -2.97,
+      "change_ytd_pct": 13.53,
+      "change_1y_pct": 1.57,
       "dividend_per_share_usd": 2.13,
-      "dividend_yield_pct": 3.27,
+      "dividend_yield_pct": 3.28,
       "yield_on_cost_pct": 3.23,
       "annual_dividend_usd": 10.65,
       "dividend_frequency": "분기배당",
@@ -521,8 +521,8 @@ window.INITIAL_MARKET_DATA = {
       "cost_basis_usd": 297.72,
       "profit_usd": 60.84,
       "profit_pct": 20.44,
-      "weight_of_total_pct": 2.12,
-      "weight_of_equity_pct": 2.25,
+      "weight_of_total_pct": 2.1,
+      "weight_of_equity_pct": 2.1,
       "change_1d_pct": 0.0,
       "change_1m_pct": 7.3,
       "change_3m_pct": 3.7,
@@ -563,18 +563,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 186.68,
       "category": "크립토 모멘텀 스윙주",
       "sector": "크립토 / 금융",
-      "current_price_usd": 164.45,
-      "market_value_usd": 328.9,
+      "current_price_usd": 159.6,
+      "market_value_usd": 319.2,
       "cost_basis_usd": 373.36,
-      "profit_usd": -44.46,
-      "profit_pct": -11.91,
-      "weight_of_total_pct": 1.94,
-      "weight_of_equity_pct": 2.07,
+      "profit_usd": -54.16,
+      "profit_pct": -14.51,
+      "weight_of_total_pct": 1.87,
+      "weight_of_equity_pct": 1.87,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -11.46,
-      "change_3m_pct": -9.53,
-      "change_ytd_pct": -27.28,
-      "change_1y_pct": 0.24,
+      "change_1m_pct": -14.07,
+      "change_3m_pct": -12.2,
+      "change_ytd_pct": -29.42,
+      "change_1y_pct": -2.71,
       "dividend_per_share_usd": 0.0,
       "dividend_yield_pct": 0.0,
       "yield_on_cost_pct": 0.0,
@@ -605,18 +605,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 129.58,
       "category": "금융/보험 개별 가치주",
       "sector": "크립토 / 금융",
-      "current_price_usd": 141.78,
-      "market_value_usd": 141.78,
+      "current_price_usd": 141.19,
+      "market_value_usd": 141.19,
       "cost_basis_usd": 129.58,
-      "profit_usd": 12.2,
-      "profit_pct": 9.42,
-      "weight_of_total_pct": 0.84,
-      "weight_of_equity_pct": 0.89,
+      "profit_usd": 11.61,
+      "profit_pct": 8.96,
+      "weight_of_total_pct": 0.83,
+      "weight_of_equity_pct": 0.83,
       "change_1d_pct": 0.0,
-      "change_1m_pct": 11.74,
-      "change_3m_pct": 7.56,
-      "change_ytd_pct": 5.58,
-      "change_1y_pct": 11.29,
+      "change_1m_pct": 11.28,
+      "change_3m_pct": 7.11,
+      "change_ytd_pct": 5.14,
+      "change_1y_pct": 10.83,
       "dividend_per_share_usd": 0.45,
       "dividend_yield_pct": 0.32,
       "yield_on_cost_pct": 0.35,
@@ -649,18 +649,18 @@ window.INITIAL_MARKET_DATA = {
       "avg_price": 121.92,
       "category": "AI 네트워크 인프라 성장주",
       "sector": "AI / 반도체",
-      "current_price_usd": 172.37,
-      "market_value_usd": 339.03,
+      "current_price_usd": 177.24,
+      "market_value_usd": 348.61,
       "cost_basis_usd": 239.8,
-      "profit_usd": 99.23,
-      "profit_pct": 41.38,
-      "weight_of_total_pct": 2.0,
-      "weight_of_equity_pct": 2.13,
+      "profit_usd": 108.81,
+      "profit_pct": 45.37,
+      "weight_of_total_pct": 2.04,
+      "weight_of_equity_pct": 2.04,
       "change_1d_pct": 0.0,
-      "change_1m_pct": -19.96,
-      "change_3m_pct": -14.77,
-      "change_ytd_pct": 31.55,
-      "change_1y_pct": 23.53,
+      "change_1m_pct": -17.7,
+      "change_3m_pct": -12.37,
+      "change_ytd_pct": 35.27,
+      "change_1y_pct": 27.02,
       "dividend_per_share_usd": 0.0,
       "dividend_yield_pct": 0.0,
       "yield_on_cost_pct": 0.0,
@@ -680,6 +680,114 @@ window.INITIAL_MARKET_DATA = {
         "10": 0.0,
         "11": 0.0,
         "12": 0.0
+      }
+    },
+    {
+      "id": "nh-sgov",
+      "account": "NH투자증권",
+      "ticker": "SGOV",
+      "name_ko": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 0.533227,
+      "avg_price": 100.67,
+      "category": "초단기 국채 파킹 (월배당 현금성 자산)",
+      "sector": "단기국채 / 현금성 ETF",
+      "current_price_usd": 100.67,
+      "market_value_usd": 53.68,
+      "cost_basis_usd": 53.68,
+      "profit_usd": 0.0,
+      "profit_pct": 0.0,
+      "weight_of_total_pct": 0.31,
+      "weight_of_equity_pct": 0.31,
+      "change_1d_pct": 0.0,
+      "change_1m_pct": 0.21,
+      "change_3m_pct": 0.63,
+      "change_ytd_pct": 3.0,
+      "change_1y_pct": 2.52,
+      "dividend_per_share_usd": 3.666,
+      "dividend_yield_pct": 3.64,
+      "yield_on_cost_pct": 3.64,
+      "annual_dividend_usd": 1.95,
+      "dividend_frequency": "월배당",
+      "payout_months": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "monthly_div_per_share": {
+        "1": 0.0,
+        "2": 0.309,
+        "3": 0.272,
+        "4": 0.293,
+        "5": 0.298,
+        "6": 0.299,
+        "7": 0.296,
+        "8": 0.307,
+        "9": 0.307,
+        "10": 0.301,
+        "11": 0.348,
+        "12": 0.636
+      }
+    },
+    {
+      "id": "toss-sgov",
+      "account": "토스증권",
+      "ticker": "SGOV",
+      "name_ko": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 9.343598,
+      "avg_price": 100.67,
+      "category": "초단기 국채 파킹 (월배당 현금성 자산)",
+      "sector": "단기국채 / 현금성 ETF",
+      "current_price_usd": 100.67,
+      "market_value_usd": 940.62,
+      "cost_basis_usd": 940.62,
+      "profit_usd": 0.0,
+      "profit_pct": 0.0,
+      "weight_of_total_pct": 5.52,
+      "weight_of_equity_pct": 5.52,
+      "change_1d_pct": 0.0,
+      "change_1m_pct": 0.21,
+      "change_3m_pct": 0.63,
+      "change_ytd_pct": 3.0,
+      "change_1y_pct": 2.52,
+      "dividend_per_share_usd": 3.666,
+      "dividend_yield_pct": 3.64,
+      "yield_on_cost_pct": 3.64,
+      "annual_dividend_usd": 34.25,
+      "dividend_frequency": "월배당",
+      "payout_months": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "monthly_div_per_share": {
+        "1": 0.0,
+        "2": 0.309,
+        "3": 0.272,
+        "4": 0.293,
+        "5": 0.298,
+        "6": 0.299,
+        "7": 0.296,
+        "8": 0.307,
+        "9": 0.307,
+        "10": 0.301,
+        "11": 0.348,
+        "12": 0.636
       }
     }
   ],
@@ -717,17 +825,17 @@ window.INITIAL_MARKET_DATA = {
   ],
   "monthly_dividends_usd": {
     "1": 0.0,
-    "2": 1.15,
-    "3": 26.59,
-    "4": 0.0,
-    "5": 1.15,
-    "6": 29.15,
-    "7": 0.0,
-    "8": 1.6,
-    "9": 28.7,
-    "10": 0.0,
-    "11": 1.15,
-    "12": 28.83
+    "2": 4.2,
+    "3": 29.28,
+    "4": 2.9,
+    "5": 4.09,
+    "6": 32.1,
+    "7": 2.93,
+    "8": 4.63,
+    "9": 31.73,
+    "10": 2.97,
+    "11": 4.59,
+    "12": 35.11
   },
   "monthly_dividend_details": {
     "1": [],
@@ -736,6 +844,16 @@ window.INITIAL_MARKET_DATA = {
         "ticker": "MSFT",
         "account": "토스증권",
         "amount_usd": 1.15
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.89
       }
     ],
     "3": [
@@ -788,14 +906,45 @@ window.INITIAL_MARKET_DATA = {
         "ticker": "XLV",
         "account": "토스증권",
         "amount_usd": 1.19
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.15
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.54
       }
     ],
-    "4": [],
+    "4": [
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.74
+      }
+    ],
     "5": [
       {
         "ticker": "MSFT",
         "account": "토스증권",
         "amount_usd": 1.15
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.78
       }
     ],
     "6": [
@@ -848,9 +997,30 @@ window.INITIAL_MARKET_DATA = {
         "ticker": "XLV",
         "account": "토스증권",
         "amount_usd": 1.31
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.79
       }
     ],
-    "7": [],
+    "7": [
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.77
+      }
+    ],
     "8": [
       {
         "ticker": "MSFT",
@@ -861,6 +1031,16 @@ window.INITIAL_MARKET_DATA = {
         "ticker": "PLMR",
         "account": "토스증권",
         "amount_usd": 0.45
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.87
       }
     ],
     "9": [
@@ -913,14 +1093,45 @@ window.INITIAL_MARKET_DATA = {
         "ticker": "XLV",
         "account": "토스증권",
         "amount_usd": 1.28
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.87
       }
     ],
-    "10": [],
+    "10": [
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.16
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 2.81
+      }
+    ],
     "11": [
       {
         "ticker": "MSFT",
         "account": "토스증권",
         "amount_usd": 1.15
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.19
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 3.25
       }
     ],
     "12": [
@@ -973,6 +1184,16 @@ window.INITIAL_MARKET_DATA = {
         "ticker": "XLV",
         "account": "토스증권",
         "amount_usd": 1.31
+      },
+      {
+        "ticker": "SGOV",
+        "account": "NH투자증권",
+        "amount_usd": 0.34
+      },
+      {
+        "ticker": "SGOV",
+        "account": "토스증권",
+        "amount_usd": 5.94
       }
     ]
   },
@@ -3170,6 +3391,30 @@ window.INITIAL_MARKET_DATA = {
       "amount_usd": 192.3,
       "fx": 1337.9,
       "note": "수익실현 전량 매도"
+    },
+    {
+      "date": "2026-10-20",
+      "account": "NH투자증권",
+      "type": "BUY",
+      "ticker": "SGOV",
+      "name": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 0.533227,
+      "price_usd": 100.67,
+      "amount_usd": 53.68,
+      "fx": 1360.0,
+      "note": "남은 외화예수금 .68 전액 SGOV 매수"
+    },
+    {
+      "date": "2026-10-20",
+      "account": "토스증권",
+      "type": "BUY",
+      "ticker": "SGOV",
+      "name": "iShares 0-3개월 미국 단기국채 ETF",
+      "shares": 9.343598,
+      "price_usd": 100.67,
+      "amount_usd": 940.62,
+      "fx": 1360.0,
+      "note": "남은 외화예수금 .62 전액 SGOV 매수"
     }
   ],
   "periods": {
@@ -3183,35 +3428,35 @@ window.INITIAL_MARKET_DATA = {
         []
       ],
       "portfolio_values_usd": [
-        16919.66,
-        16919.66
+        16919.56,
+        17050.61
       ],
       "portfolio_values_krw": [
-        22435300.0,
-        22363730.0
+        22435169.0,
+        22536811.0
       ],
       "portfolio_index_usd": [
         100.0,
-        100.0
+        100.77
       ],
       "portfolio_index_krw": [
         100.0,
-        99.68
+        100.45
       ],
       "portfolio_return_series": [
         0.0,
-        0.0
+        0.77
       ],
       "portfolio_return_series_usd": [
         0.0,
-        0.0
+        0.77
       ],
       "portfolio_return_series_krw": [
         0.0,
-        -0.32
+        0.45
       ],
       "portfolio_metrics": {
-        "total_return_pct": 0.0,
+        "total_return_pct": 0.77,
         "cagr_pct": 0.0,
         "volatility_pct": 0.0,
         "sharpe": 0.0,
@@ -3219,13 +3464,13 @@ window.INITIAL_MARKET_DATA = {
         "mdd_pct": 0.0,
         "beta": 1.0,
         "win_rate_pct": 0.0,
-        "profit_usd": 0.0,
-        "profit_krw": -71570.0,
-        "raw_asset_change_usd": 0.0,
-        "raw_asset_change_krw": -71570.0
+        "profit_usd": 131.05,
+        "profit_krw": 101642.0,
+        "raw_asset_change_usd": 131.05,
+        "raw_asset_change_krw": 101642.0
       },
       "portfolio_metrics_usd": {
-        "total_return_pct": 0.0,
+        "total_return_pct": 0.77,
         "cagr_pct": 0.0,
         "volatility_pct": 0.0,
         "sharpe": 0.0,
@@ -3233,13 +3478,13 @@ window.INITIAL_MARKET_DATA = {
         "mdd_pct": 0.0,
         "beta": 1.0,
         "win_rate_pct": 0.0,
-        "profit_usd": 0.0,
-        "profit_krw": -71570.0,
-        "raw_asset_change_usd": 0.0,
-        "raw_asset_change_krw": -71570.0
+        "profit_usd": 131.05,
+        "profit_krw": 101642.0,
+        "raw_asset_change_usd": 131.05,
+        "raw_asset_change_krw": 101642.0
       },
       "portfolio_metrics_krw": {
-        "total_return_pct": -0.32,
+        "total_return_pct": 0.45,
         "cagr_pct": 0.0,
         "volatility_pct": 0.0,
         "sharpe": 0.0,
@@ -3247,10 +3492,10 @@ window.INITIAL_MARKET_DATA = {
         "mdd_pct": 0.0,
         "beta": 1.0,
         "win_rate_pct": 0.0,
-        "profit_usd": 0.0,
-        "profit_krw": -71570.0,
-        "raw_asset_change_usd": 0.0,
-        "raw_asset_change_krw": -71570.0
+        "profit_usd": 131.05,
+        "profit_krw": 101642.0,
+        "raw_asset_change_usd": 131.05,
+        "raw_asset_change_krw": 101642.0
       },
       "benchmark_series": {
         "BTC": [
@@ -3267,7 +3512,7 @@ window.INITIAL_MARKET_DATA = {
         ],
         "SOXX": [
           0.0,
-          0.0
+          2.85
         ],
         "KOSPI200": [
           0.0,
@@ -3289,7 +3534,7 @@ window.INITIAL_MARKET_DATA = {
         ],
         "SOXX": [
           0.0,
-          0.0
+          2.85
         ],
         "KOSPI200": [
           0.0,
@@ -3311,7 +3556,7 @@ window.INITIAL_MARKET_DATA = {
         ],
         "SOXX": [
           0.0,
-          -0.32
+          2.52
         ],
         "KOSPI200": [
           0.0,
@@ -3333,7 +3578,7 @@ window.INITIAL_MARKET_DATA = {
         ],
         "SOXX": [
           100.0,
-          100.0
+          102.85
         ],
         "KOSPI200": [
           100.0,
@@ -3355,7 +3600,7 @@ window.INITIAL_MARKET_DATA = {
         ],
         "SOXX": [
           100.0,
-          99.68
+          102.52
         ],
         "KOSPI200": [
           100.0,
@@ -3394,7 +3639,7 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 0.0
         },
         "SOXX": {
-          "total_return_pct": 0.0,
+          "total_return_pct": 2.85,
           "cagr_pct": 0.0,
           "volatility_pct": 0.0,
           "sharpe": 0.0,
@@ -3446,7 +3691,7 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 0.0
         },
         "SOXX": {
-          "total_return_pct": 0.0,
+          "total_return_pct": 2.85,
           "cagr_pct": 0.0,
           "volatility_pct": 0.0,
           "sharpe": 0.0,
@@ -3498,7 +3743,7 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 0.0
         },
         "SOXX": {
-          "total_return_pct": -0.32,
+          "total_return_pct": 2.52,
           "cagr_pct": 0.0,
           "volatility_pct": 0.0,
           "sharpe": 0.0,
@@ -3562,7 +3807,24 @@ window.INITIAL_MARKET_DATA = {
         [],
         [],
         [],
-        [],
+        [
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 0.533227,
+            "amount_usd": 53.68,
+            "price_usd": 100.67,
+            "account": "NH투자증권"
+          },
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 9.343598,
+            "amount_usd": 940.62,
+            "price_usd": 100.67,
+            "account": "토스증권"
+          }
+        ],
         [],
         [],
         [],
@@ -3586,11 +3848,11 @@ window.INITIAL_MARKET_DATA = {
         17427.67,
         17080.16,
         17202.89,
-        17230.34,
-        17329.13,
-        16980.56,
-        16919.66,
-        16919.66
+        17229.75,
+        17328.64,
+        16980.07,
+        16919.56,
+        17050.61
       ],
       "portfolio_values_krw": [
         24040758.0,
@@ -3610,11 +3872,11 @@ window.INITIAL_MARKET_DATA = {
         23341754.0,
         22903634.0,
         22938853.0,
-        22916356.0,
-        22942729.0,
-        22509265.0,
-        22435300.0,
-        22363730.0
+        22915568.0,
+        22942075.0,
+        22508611.0,
+        22435169.0,
+        22536811.0
       ],
       "portfolio_index_usd": [
         100.0,
@@ -3638,7 +3900,7 @@ window.INITIAL_MARKET_DATA = {
         98.56,
         96.58,
         96.23,
-        96.23
+        96.98
       ],
       "portfolio_index_krw": [
         100.0,
@@ -3662,7 +3924,7 @@ window.INITIAL_MARKET_DATA = {
         95.43,
         93.63,
         93.32,
-        93.02
+        93.74
       ],
       "portfolio_return_series": [
         0.0,
@@ -3686,7 +3948,7 @@ window.INITIAL_MARKET_DATA = {
         -1.44,
         -3.42,
         -3.77,
-        -3.77
+        -3.02
       ],
       "portfolio_return_series_usd": [
         0.0,
@@ -3710,7 +3972,7 @@ window.INITIAL_MARKET_DATA = {
         -1.44,
         -3.42,
         -3.77,
-        -3.77
+        -3.02
       ],
       "portfolio_return_series_krw": [
         0.0,
@@ -3734,49 +3996,49 @@ window.INITIAL_MARKET_DATA = {
         -4.57,
         -6.37,
         -6.68,
-        -6.98
+        -6.26
       ],
       "portfolio_metrics": {
-        "total_return_pct": -3.77,
-        "cagr_pct": -36.92,
-        "volatility_pct": 13.77,
-        "sharpe": -3.57,
-        "sortino": -4.01,
+        "total_return_pct": -3.02,
+        "cagr_pct": -30.8,
+        "volatility_pct": 14.16,
+        "sharpe": -2.82,
+        "sortino": -3.25,
         "mdd_pct": -5.24,
-        "beta": 1.29,
-        "win_rate_pct": 42.9,
-        "profit_usd": -662.22,
-        "profit_krw": -1677028.0,
-        "raw_asset_change_usd": -662.22,
-        "raw_asset_change_krw": -1677028.0
+        "beta": 1.36,
+        "win_rate_pct": 47.6,
+        "profit_usd": -531.27,
+        "profit_krw": -1503948.0,
+        "raw_asset_change_usd": -531.27,
+        "raw_asset_change_krw": -1503948.0
       },
       "portfolio_metrics_usd": {
-        "total_return_pct": -3.77,
-        "cagr_pct": -36.92,
-        "volatility_pct": 13.77,
-        "sharpe": -3.57,
-        "sortino": -4.01,
+        "total_return_pct": -3.02,
+        "cagr_pct": -30.8,
+        "volatility_pct": 14.16,
+        "sharpe": -2.82,
+        "sortino": -3.25,
         "mdd_pct": -5.24,
-        "beta": 1.29,
-        "win_rate_pct": 42.9,
-        "profit_usd": -662.22,
-        "profit_krw": -1677028.0,
-        "raw_asset_change_usd": -662.22,
-        "raw_asset_change_krw": -1677028.0
+        "beta": 1.36,
+        "win_rate_pct": 47.6,
+        "profit_usd": -531.27,
+        "profit_krw": -1503948.0,
+        "raw_asset_change_usd": -531.27,
+        "raw_asset_change_krw": -1503948.0
       },
       "portfolio_metrics_krw": {
-        "total_return_pct": -6.98,
-        "cagr_pct": -58.01,
-        "volatility_pct": 13.87,
-        "sharpe": -6.47,
-        "sortino": -6.78,
-        "mdd_pct": -6.79,
-        "beta": 1.14,
-        "win_rate_pct": 38.1,
-        "profit_usd": -662.22,
-        "profit_krw": -1677028.0,
-        "raw_asset_change_usd": -662.22,
-        "raw_asset_change_krw": -1677028.0
+        "total_return_pct": -6.26,
+        "cagr_pct": -53.94,
+        "volatility_pct": 14.14,
+        "sharpe": -5.7,
+        "sortino": -6.1,
+        "mdd_pct": -6.49,
+        "beta": 1.18,
+        "win_rate_pct": 42.9,
+        "profit_usd": -531.27,
+        "profit_krw": -1503948.0,
+        "raw_asset_change_usd": -531.27,
+        "raw_asset_change_krw": -1503948.0
       },
       "benchmark_series": {
         "BTC": [
@@ -3873,7 +4135,7 @@ window.INITIAL_MARKET_DATA = {
           -10.88,
           -16.94,
           -16.5,
-          -16.5
+          -14.12
         ],
         "KOSPI200": [
           0.0,
@@ -3995,7 +4257,7 @@ window.INITIAL_MARKET_DATA = {
           -10.88,
           -16.94,
           -16.5,
-          -16.5
+          -14.12
         ],
         "KOSPI200": [
           0.0,
@@ -4117,7 +4379,7 @@ window.INITIAL_MARKET_DATA = {
           -13.71,
           -19.47,
           -19.02,
-          -19.28
+          -16.98
         ],
         "KOSPI200": [
           0.0,
@@ -4239,7 +4501,7 @@ window.INITIAL_MARKET_DATA = {
           89.12,
           83.06,
           83.5,
-          83.5
+          85.88
         ],
         "KOSPI200": [
           100.0,
@@ -4361,7 +4623,7 @@ window.INITIAL_MARKET_DATA = {
           86.29,
           80.53,
           80.98,
-          80.72
+          83.02
         ],
         "KOSPI200": [
           100.0,
@@ -4420,14 +4682,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 47.6
         },
         "SOXX": {
-          "total_return_pct": -16.5,
-          "cagr_pct": -88.51,
-          "volatility_pct": 37.2,
-          "sharpe": -5.72,
-          "sortino": -5.87,
+          "total_return_pct": -14.12,
+          "cagr_pct": -83.9,
+          "volatility_pct": 39.25,
+          "sharpe": -4.55,
+          "sortino": -4.93,
           "mdd_pct": -19.31,
-          "beta": 2.9,
-          "win_rate_pct": 38.1
+          "beta": 3.17,
+          "win_rate_pct": 42.9
         },
         "KOSPI200": {
           "total_return_pct": -21.37,
@@ -4472,14 +4734,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 47.6
         },
         "SOXX": {
-          "total_return_pct": -16.5,
-          "cagr_pct": -88.51,
-          "volatility_pct": 37.2,
-          "sharpe": -5.72,
-          "sortino": -5.87,
+          "total_return_pct": -14.12,
+          "cagr_pct": -83.9,
+          "volatility_pct": 39.25,
+          "sharpe": -4.55,
+          "sortino": -4.93,
           "mdd_pct": -19.31,
-          "beta": 2.9,
-          "win_rate_pct": 38.1
+          "beta": 3.17,
+          "win_rate_pct": 42.9
         },
         "KOSPI200": {
           "total_return_pct": -21.37,
@@ -4524,14 +4786,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 42.9
         },
         "SOXX": {
-          "total_return_pct": -19.28,
-          "cagr_pct": -92.35,
-          "volatility_pct": 36.68,
-          "sharpe": -6.91,
-          "sortino": -6.9,
+          "total_return_pct": -16.98,
+          "cagr_pct": -89.28,
+          "volatility_pct": 38.6,
+          "sharpe": -5.68,
+          "sortino": -5.98,
           "mdd_pct": -21.3,
-          "beta": 2.26,
-          "win_rate_pct": 33.3
+          "beta": 2.42,
+          "win_rate_pct": 38.1
         },
         "KOSPI200": {
           "total_return_pct": -24.0,
@@ -4715,7 +4977,24 @@ window.INITIAL_MARKET_DATA = {
         [],
         [],
         [],
-        [],
+        [
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 0.533227,
+            "amount_usd": 53.68,
+            "price_usd": 100.67,
+            "account": "NH투자증권"
+          },
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 9.343598,
+            "amount_usd": 940.62,
+            "price_usd": 100.67,
+            "account": "토스증권"
+          }
+        ],
         [],
         [],
         [],
@@ -4781,11 +5060,11 @@ window.INITIAL_MARKET_DATA = {
         17427.67,
         17080.16,
         17202.89,
-        17230.34,
-        17329.13,
-        16980.56,
-        16919.66,
-        16919.66
+        17229.75,
+        17328.64,
+        16980.07,
+        16919.56,
+        17050.61
       ],
       "portfolio_values_krw": [
         23215486.0,
@@ -4847,11 +5126,11 @@ window.INITIAL_MARKET_DATA = {
         23341754.0,
         22903634.0,
         22938853.0,
-        22916356.0,
-        22942729.0,
-        22509265.0,
-        22435300.0,
-        22363730.0
+        22915568.0,
+        22942075.0,
+        22508611.0,
+        22435169.0,
+        22536811.0
       ],
       "portfolio_index_usd": [
         100.0,
@@ -4917,7 +5196,7 @@ window.INITIAL_MARKET_DATA = {
         104.89,
         102.78,
         102.41,
-        102.41
+        103.21
       ],
       "portfolio_index_krw": [
         100.0,
@@ -4981,9 +5260,9 @@ window.INITIAL_MARKET_DATA = {
         94.81,
         94.72,
         94.83,
-        93.04,
+        93.03,
         92.73,
-        92.44
+        93.15
       ],
       "portfolio_return_series": [
         0.0,
@@ -5049,7 +5328,7 @@ window.INITIAL_MARKET_DATA = {
         4.89,
         2.78,
         2.41,
-        2.41
+        3.21
       ],
       "portfolio_return_series_usd": [
         0.0,
@@ -5115,7 +5394,7 @@ window.INITIAL_MARKET_DATA = {
         4.89,
         2.78,
         2.41,
-        2.41
+        3.21
       ],
       "portfolio_return_series_krw": [
         0.0,
@@ -5179,51 +5458,51 @@ window.INITIAL_MARKET_DATA = {
         -5.19,
         -5.28,
         -5.17,
-        -6.96,
+        -6.97,
         -7.27,
-        -7.56
+        -6.85
       ],
       "portfolio_metrics": {
-        "total_return_pct": 2.41,
-        "cagr_pct": 10.01,
-        "volatility_pct": 14.8,
-        "sharpe": 0.44,
-        "sortino": 0.68,
+        "total_return_pct": 3.21,
+        "cagr_pct": 13.45,
+        "volatility_pct": 14.87,
+        "sharpe": 0.65,
+        "sortino": 1.0,
         "mdd_pct": -5.24,
-        "beta": 1.25,
-        "win_rate_pct": 44.4,
-        "profit_usd": 371.44,
-        "profit_krw": -1804535.0,
-        "raw_asset_change_usd": 1066.85,
-        "raw_asset_change_krw": -851755.0
+        "beta": 1.27,
+        "win_rate_pct": 46.0,
+        "profit_usd": 502.39,
+        "profit_krw": -1631454.0,
+        "raw_asset_change_usd": 1197.8,
+        "raw_asset_change_krw": -678675.0
       },
       "portfolio_metrics_usd": {
-        "total_return_pct": 2.41,
-        "cagr_pct": 10.01,
-        "volatility_pct": 14.8,
-        "sharpe": 0.44,
-        "sortino": 0.68,
+        "total_return_pct": 3.21,
+        "cagr_pct": 13.45,
+        "volatility_pct": 14.87,
+        "sharpe": 0.65,
+        "sortino": 1.0,
         "mdd_pct": -5.24,
-        "beta": 1.25,
-        "win_rate_pct": 44.4,
-        "profit_usd": 371.44,
-        "profit_krw": -1804535.0,
-        "raw_asset_change_usd": 1066.85,
-        "raw_asset_change_krw": -851755.0
+        "beta": 1.27,
+        "win_rate_pct": 46.0,
+        "profit_usd": 502.39,
+        "profit_krw": -1631454.0,
+        "raw_asset_change_usd": 1197.8,
+        "raw_asset_change_krw": -678675.0
       },
       "portfolio_metrics_krw": {
-        "total_return_pct": -7.56,
-        "cagr_pct": -27.0,
-        "volatility_pct": 18.53,
-        "sharpe": -1.83,
-        "sortino": -2.48,
-        "mdd_pct": -10.97,
+        "total_return_pct": -6.85,
+        "cagr_pct": -24.71,
+        "volatility_pct": 18.56,
+        "sharpe": -1.66,
+        "sortino": -2.26,
+        "mdd_pct": -10.69,
         "beta": 1.1,
-        "win_rate_pct": 41.3,
-        "profit_usd": 371.44,
-        "profit_krw": -1804535.0,
-        "raw_asset_change_usd": 1066.85,
-        "raw_asset_change_krw": -851755.0
+        "win_rate_pct": 42.9,
+        "profit_usd": 502.39,
+        "profit_krw": -1631454.0,
+        "raw_asset_change_usd": 1197.8,
+        "raw_asset_change_krw": -678675.0
       },
       "benchmark_series": {
         "BTC": [
@@ -5488,7 +5767,7 @@ window.INITIAL_MARKET_DATA = {
           3.91,
           -3.15,
           -2.63,
-          -2.63
+          0.14
         ],
         "KOSPI200": [
           0.0,
@@ -5820,7 +6099,7 @@ window.INITIAL_MARKET_DATA = {
           3.91,
           -3.15,
           -2.63,
-          -2.63
+          0.14
         ],
         "KOSPI200": [
           0.0,
@@ -6152,7 +6431,7 @@ window.INITIAL_MARKET_DATA = {
           -6.06,
           -12.33,
           -11.84,
-          -12.12
+          -9.62
         ],
         "KOSPI200": [
           0.0,
@@ -6484,7 +6763,7 @@ window.INITIAL_MARKET_DATA = {
           103.91,
           96.85,
           97.37,
-          97.37
+          100.14
         ],
         "KOSPI200": [
           100.0,
@@ -6816,7 +7095,7 @@ window.INITIAL_MARKET_DATA = {
           93.94,
           87.67,
           88.16,
-          87.88
+          90.38
         ],
         "KOSPI200": [
           100.0,
@@ -6917,14 +7196,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 52.4
         },
         "SOXX": {
-          "total_return_pct": -2.63,
-          "cagr_pct": -10.13,
-          "volatility_pct": 43.49,
-          "sharpe": -0.13,
-          "sortino": -0.18,
+          "total_return_pct": 0.14,
+          "cagr_pct": 0.56,
+          "volatility_pct": 43.86,
+          "sharpe": 0.13,
+          "sortino": 0.19,
           "mdd_pct": -19.31,
-          "beta": 2.71,
-          "win_rate_pct": 58.7
+          "beta": 2.77,
+          "win_rate_pct": 60.3
         },
         "KOSPI200": {
           "total_return_pct": -0.21,
@@ -6969,14 +7248,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 52.4
         },
         "SOXX": {
-          "total_return_pct": -2.63,
-          "cagr_pct": -10.13,
-          "volatility_pct": 43.49,
-          "sharpe": -0.13,
-          "sortino": -0.18,
+          "total_return_pct": 0.14,
+          "cagr_pct": 0.56,
+          "volatility_pct": 43.86,
+          "sharpe": 0.13,
+          "sortino": 0.19,
           "mdd_pct": -19.31,
-          "beta": 2.71,
-          "win_rate_pct": 58.7
+          "beta": 2.77,
+          "win_rate_pct": 60.3
         },
         "KOSPI200": {
           "total_return_pct": -0.21,
@@ -7021,14 +7300,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 47.6
         },
         "SOXX": {
-          "total_return_pct": -12.12,
-          "cagr_pct": -40.36,
-          "volatility_pct": 45.11,
-          "sharpe": -1.01,
-          "sortino": -1.36,
+          "total_return_pct": -9.62,
+          "cagr_pct": -33.26,
+          "volatility_pct": 45.43,
+          "sharpe": -0.76,
+          "sortino": -1.02,
           "mdd_pct": -21.3,
-          "beta": 1.85,
-          "win_rate_pct": 50.8
+          "beta": 1.87,
+          "win_rate_pct": 52.4
         },
         "KOSPI200": {
           "total_return_pct": -9.93,
@@ -7893,7 +8172,24 @@ window.INITIAL_MARKET_DATA = {
         [],
         [],
         [],
-        [],
+        [
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 0.533227,
+            "amount_usd": 53.68,
+            "price_usd": 100.67,
+            "account": "NH투자증권"
+          },
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 9.343598,
+            "amount_usd": 940.62,
+            "price_usd": 100.67,
+            "account": "토스증권"
+          }
+        ],
         [],
         [],
         [],
@@ -7978,7 +8274,7 @@ window.INITIAL_MARKET_DATA = {
         14626.46,
         14841.55,
         14761.91,
-        14936.79,
+        14936.8,
         14934.42,
         14780.56,
         14819.58,
@@ -7990,7 +8286,7 @@ window.INITIAL_MARKET_DATA = {
         15267.85,
         15507.39,
         15492.48,
-        15425.89,
+        15425.88,
         15542.66,
         15714.55,
         15497.95,
@@ -8101,46 +8397,46 @@ window.INITIAL_MARKET_DATA = {
         17427.67,
         17080.16,
         17202.89,
-        17230.34,
-        17329.13,
-        16980.56,
-        16919.66,
-        16919.66
+        17229.75,
+        17328.64,
+        16980.07,
+        16919.56,
+        17050.61
       ],
       "portfolio_values_krw": [
-        13510988.0,
+        13510989.0,
         13596684.0,
         13621704.0,
-        13749495.0,
+        13749494.0,
         13730670.0,
         13665844.0,
-        13851253.0,
-        13959963.0,
+        13851254.0,
+        13959964.0,
         14071724.0,
         14013731.0,
         13971311.0,
         14044792.0,
-        13769119.0,
+        13769120.0,
         13942372.0,
-        13884284.0,
+        13884283.0,
         13854880.0,
         13768963.0,
         15883226.0,
-        15811159.0,
+        15811160.0,
         15710574.0,
         15638408.0,
-        15913813.0,
+        15913812.0,
         15784464.0,
-        15557972.0,
+        15557971.0,
         15603327.0,
-        16096950.0,
+        16096951.0,
         16131657.0,
         16025273.0,
         16001252.0,
         15618028.0,
         15584179.0,
-        15596380.0,
-        15666941.0,
+        15596379.0,
+        15666940.0,
         15635207.0,
         15791204.0,
         15604857.0,
@@ -8150,76 +8446,76 @@ window.INITIAL_MARKET_DATA = {
         15572703.0,
         15629454.0,
         15631373.0,
-        16124416.0,
+        16124415.0,
         15890397.0,
         15911240.0,
         16167598.0,
-        15913854.0,
+        15913855.0,
         15993967.0,
         15798577.0,
-        15615227.0,
-        16101386.0,
+        15615226.0,
+        16101387.0,
         15978314.0,
-        15746322.0,
+        15746323.0,
         15941465.0,
         15526189.0,
         15878017.0,
         15568145.0,
         15773662.0,
         15473599.0,
-        15302695.0,
+        15302694.0,
         15183056.0,
         15739010.0,
         15740607.0,
-        15866667.0,
-        15909772.0,
-        16042480.0,
-        16411031.0,
+        15866668.0,
+        15909773.0,
+        16042479.0,
+        16411030.0,
         16270266.0,
         16261305.0,
         17542305.0,
-        17699264.0,
+        17699265.0,
         18826984.0,
-        20028530.0,
-        21411230.0,
+        20028529.0,
+        21411231.0,
         21513469.0,
-        21490067.0,
+        21490066.0,
         22051571.0,
         21817516.0,
-        22105708.0,
+        22105709.0,
         22023637.0,
         21771763.0,
         21814275.0,
         22340623.0,
-        22260984.0,
+        22260983.0,
         22127537.0,
-        22400181.0,
+        22400182.0,
         22602251.0,
         22053641.0,
         22559990.0,
         22627542.0,
-        22744695.0,
-        23205041.0,
-        23412165.0,
-        23143706.0,
+        22744694.0,
+        23205040.0,
+        23412166.0,
+        23143705.0,
         23140280.0,
         22875633.0,
         23413367.0,
         23309902.0,
-        23451598.0,
+        23451597.0,
         23908551.0,
-        23707261.0,
+        23707262.0,
         23853807.0,
         23880912.0,
-        24268568.0,
-        24450264.0,
-        24421990.0,
-        24302567.0,
+        24268569.0,
+        24450263.0,
+        24421991.0,
+        24302566.0,
         23436035.0,
         23927031.0,
         23390072.0,
-        22867899.0,
-        23348136.0,
+        22867900.0,
+        23348135.0,
         23365033.0,
         23788164.0,
         23535265.0,
@@ -8309,11 +8605,11 @@ window.INITIAL_MARKET_DATA = {
         23341754.0,
         22903634.0,
         22938853.0,
-        22916356.0,
-        22942729.0,
-        22509265.0,
-        22435300.0,
-        22363730.0
+        22915568.0,
+        22942075.0,
+        22508611.0,
+        22435169.0,
+        22536811.0
       ],
       "portfolio_index_usd": [
         100.0,
@@ -8518,10 +8814,10 @@ window.INITIAL_MARKET_DATA = {
         114.86,
         115.69,
         115.87,
-        116.54,
+        116.53,
         114.19,
         113.78,
-        113.78
+        114.66
       ],
       "portfolio_index_krw": [
         100.0,
@@ -8725,11 +9021,11 @@ window.INITIAL_MARKET_DATA = {
         109.17,
         107.12,
         107.28,
-        107.18,
+        107.17,
         107.3,
         105.27,
         104.93,
-        104.59
+        105.4
       ],
       "portfolio_return_series": [
         0.0,
@@ -8934,10 +9230,10 @@ window.INITIAL_MARKET_DATA = {
         14.86,
         15.69,
         15.87,
-        16.54,
+        16.53,
         14.19,
         13.78,
-        13.78
+        14.66
       ],
       "portfolio_return_series_usd": [
         0.0,
@@ -9142,10 +9438,10 @@ window.INITIAL_MARKET_DATA = {
         14.86,
         15.69,
         15.87,
-        16.54,
+        16.53,
         14.19,
         13.78,
-        13.78
+        14.66
       ],
       "portfolio_return_series_krw": [
         0.0,
@@ -9349,53 +9645,53 @@ window.INITIAL_MARKET_DATA = {
         9.17,
         7.12,
         7.28,
-        7.18,
+        7.17,
         7.3,
         5.27,
         4.93,
-        4.59
+        5.4
       ],
       "portfolio_metrics": {
-        "total_return_pct": 13.78,
-        "cagr_pct": 17.2,
-        "volatility_pct": 16.23,
-        "sharpe": 0.81,
-        "sortino": 1.19,
+        "total_return_pct": 14.66,
+        "cagr_pct": 18.32,
+        "volatility_pct": 16.25,
+        "sharpe": 0.86,
+        "sortino": 1.27,
         "mdd_pct": -8.72,
-        "beta": 1.18,
-        "win_rate_pct": 51.7,
-        "profit_usd": 1670.04,
-        "profit_krw": 352649.0,
-        "raw_asset_change_usd": 7523.39,
-        "raw_asset_change_krw": 8852742.0
+        "beta": 1.19,
+        "win_rate_pct": 52.2,
+        "profit_usd": 1800.99,
+        "profit_krw": 525729.0,
+        "raw_asset_change_usd": 7654.34,
+        "raw_asset_change_krw": 9025822.0
       },
       "portfolio_metrics_usd": {
-        "total_return_pct": 13.78,
-        "cagr_pct": 17.2,
-        "volatility_pct": 16.23,
-        "sharpe": 0.81,
-        "sortino": 1.19,
+        "total_return_pct": 14.66,
+        "cagr_pct": 18.32,
+        "volatility_pct": 16.25,
+        "sharpe": 0.86,
+        "sortino": 1.27,
         "mdd_pct": -8.72,
-        "beta": 1.18,
-        "win_rate_pct": 51.7,
-        "profit_usd": 1670.04,
-        "profit_krw": 352649.0,
-        "raw_asset_change_usd": 7523.39,
-        "raw_asset_change_krw": 8852742.0
+        "beta": 1.19,
+        "win_rate_pct": 52.2,
+        "profit_usd": 1800.99,
+        "profit_krw": 525729.0,
+        "raw_asset_change_usd": 7654.34,
+        "raw_asset_change_krw": 9025822.0
       },
       "portfolio_metrics_krw": {
-        "total_return_pct": 4.59,
-        "cagr_pct": 5.67,
+        "total_return_pct": 5.4,
+        "cagr_pct": 6.68,
         "volatility_pct": 20.37,
-        "sharpe": 0.17,
-        "sortino": 0.25,
-        "mdd_pct": -16.26,
-        "beta": 1.09,
-        "win_rate_pct": 48.3,
-        "profit_usd": 1670.04,
-        "profit_krw": 352649.0,
-        "raw_asset_change_usd": 7523.39,
-        "raw_asset_change_krw": 8852742.0
+        "sharpe": 0.22,
+        "sortino": 0.32,
+        "mdd_pct": -15.99,
+        "beta": 1.1,
+        "win_rate_pct": 48.8,
+        "profit_usd": 1800.99,
+        "profit_krw": 525729.0,
+        "raw_asset_change_usd": 7654.34,
+        "raw_asset_change_krw": 9025822.0
       },
       "benchmark_series": {
         "BTC": [
@@ -10228,7 +10524,7 @@ window.INITIAL_MARKET_DATA = {
           69.77,
           58.23,
           59.07,
-          59.07
+          63.6
         ],
         "KOSPI200": [
           0.0,
@@ -11270,7 +11566,7 @@ window.INITIAL_MARKET_DATA = {
           69.77,
           58.23,
           59.07,
-          59.07
+          63.6
         ],
         "KOSPI200": [
           0.0,
@@ -12125,7 +12421,7 @@ window.INITIAL_MARKET_DATA = {
           16.48,
           14.47,
           16.83,
-          19.24,
+          19.25,
           19.2,
           14.26,
           18.0,
@@ -12312,7 +12608,7 @@ window.INITIAL_MARKET_DATA = {
           56.31,
           45.87,
           46.69,
-          46.22
+          50.39
         ],
         "KOSPI200": [
           0.0,
@@ -13354,7 +13650,7 @@ window.INITIAL_MARKET_DATA = {
           169.77,
           158.23,
           159.07,
-          159.07
+          163.6
         ],
         "KOSPI200": [
           100.0,
@@ -14209,7 +14505,7 @@ window.INITIAL_MARKET_DATA = {
           116.48,
           114.47,
           116.83,
-          119.24,
+          119.25,
           119.2,
           114.26,
           118.0,
@@ -14396,7 +14692,7 @@ window.INITIAL_MARKET_DATA = {
           156.31,
           145.87,
           146.69,
-          146.22
+          150.39
         ],
         "KOSPI200": [
           100.0,
@@ -14639,14 +14935,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 53.7
         },
         "SOXX": {
-          "total_return_pct": 59.07,
-          "cagr_pct": 76.93,
-          "volatility_pct": 48.86,
-          "sharpe": 1.33,
-          "sortino": 1.92,
+          "total_return_pct": 63.6,
+          "cagr_pct": 83.15,
+          "volatility_pct": 48.94,
+          "sharpe": 1.4,
+          "sortino": 2.02,
           "mdd_pct": -29.01,
-          "beta": 2.67,
-          "win_rate_pct": 60.5
+          "beta": 2.69,
+          "win_rate_pct": 61.0
         },
         "KOSPI200": {
           "total_return_pct": 54.79,
@@ -14691,14 +14987,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 53.7
         },
         "SOXX": {
-          "total_return_pct": 59.07,
-          "cagr_pct": 76.93,
-          "volatility_pct": 48.86,
-          "sharpe": 1.33,
-          "sortino": 1.92,
+          "total_return_pct": 63.6,
+          "cagr_pct": 83.15,
+          "volatility_pct": 48.94,
+          "sharpe": 1.4,
+          "sortino": 2.02,
           "mdd_pct": -29.01,
-          "beta": 2.67,
-          "win_rate_pct": 60.5
+          "beta": 2.69,
+          "win_rate_pct": 61.0
         },
         "KOSPI200": {
           "total_return_pct": 54.79,
@@ -14743,14 +15039,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 49.8
         },
         "SOXX": {
-          "total_return_pct": 46.22,
-          "cagr_pct": 59.53,
-          "volatility_pct": 51.11,
-          "sharpe": 1.09,
-          "sortino": 1.6,
+          "total_return_pct": 50.39,
+          "cagr_pct": 65.14,
+          "volatility_pct": 51.16,
+          "sharpe": 1.16,
+          "sortino": 1.7,
           "mdd_pct": -37.09,
-          "beta": 1.98,
-          "win_rate_pct": 56.1
+          "beta": 1.99,
+          "win_rate_pct": 56.6
         },
         "KOSPI200": {
           "total_return_pct": 42.29,
@@ -15833,7 +16129,24 @@ window.INITIAL_MARKET_DATA = {
         [],
         [],
         [],
-        [],
+        [
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 0.533227,
+            "amount_usd": 53.68,
+            "price_usd": 100.67,
+            "account": "NH투자증권"
+          },
+          {
+            "type": "BUY",
+            "ticker": "SGOV",
+            "shares": 9.343598,
+            "amount_usd": 940.62,
+            "price_usd": 100.67,
+            "account": "토스증권"
+          }
+        ],
         [],
         [],
         [],
@@ -15852,7 +16165,7 @@ window.INITIAL_MARKET_DATA = {
         8344.19,
         8328.3,
         8434.28,
-        8465.24,
+        8465.25,
         8486.51,
         8377.75,
         9257.28,
@@ -15881,7 +16194,7 @@ window.INITIAL_MARKET_DATA = {
         9246.74,
         9373.37,
         9415.5,
-        9466.89,
+        9466.9,
         9499.74,
         9510.78,
         9470.65,
@@ -15964,7 +16277,7 @@ window.INITIAL_MARKET_DATA = {
         14626.46,
         14841.55,
         14761.91,
-        14936.79,
+        14936.8,
         14934.42,
         14780.56,
         14819.58,
@@ -15976,7 +16289,7 @@ window.INITIAL_MARKET_DATA = {
         15267.85,
         15507.39,
         15492.48,
-        15425.89,
+        15425.88,
         15542.66,
         15714.55,
         15497.95,
@@ -16087,92 +16400,92 @@ window.INITIAL_MARKET_DATA = {
         17427.67,
         17080.16,
         17202.89,
-        17230.34,
-        17329.13,
-        16980.56,
-        16919.66,
-        16919.66
+        17229.75,
+        17328.64,
+        16980.07,
+        16919.56,
+        17050.61
       ],
       "portfolio_values_krw": [
         11978753.0,
         12144428.0,
-        12146241.0,
+        12146240.0,
         12153642.0,
-        11982790.0,
+        11982791.0,
         11965737.0,
-        11939208.0,
-        11799073.0,
-        11962388.0,
+        11939209.0,
+        11799074.0,
+        11962387.0,
         12013467.0,
         12058553.0,
-        12263436.0,
+        12263437.0,
         12326158.0,
         12388953.0,
         12298706.0,
         13596255.0,
-        13296580.0,
-        13359216.0,
+        13296579.0,
+        13359217.0,
         13407227.0,
-        13270664.0,
+        13270663.0,
         13427494.0,
-        13678919.0,
+        13678920.0,
         13887476.0,
         13921618.0,
-        13973608.0,
+        13973609.0,
         13891865.0,
         13945247.0,
-        13957324.0,
+        13957323.0,
         13931314.0,
         14055059.0,
         14047349.0,
-        14026567.0,
+        14026566.0,
         14115701.0,
-        14105937.0,
-        13810342.0,
-        13730267.0,
+        14105936.0,
+        13810343.0,
+        13730268.0,
         13674337.0,
-        13487599.0,
+        13487600.0,
         13629697.0,
-        13819716.0,
+        13819715.0,
         13875806.0,
         13981089.0,
-        14046978.0,
-        13757529.0,
+        14046979.0,
+        13757530.0,
         13650328.0,
         13574368.0,
-        13510988.0,
+        13510989.0,
         13596684.0,
         13621704.0,
-        13749495.0,
+        13749494.0,
         13730670.0,
         13665844.0,
-        13851253.0,
-        13959963.0,
+        13851254.0,
+        13959964.0,
         14071724.0,
         14013731.0,
         13971311.0,
         14044792.0,
-        13769119.0,
+        13769120.0,
         13942372.0,
-        13884284.0,
+        13884283.0,
         13854880.0,
         13768963.0,
         15883226.0,
-        15811159.0,
+        15811160.0,
         15710574.0,
         15638408.0,
-        15913813.0,
+        15913812.0,
         15784464.0,
-        15557972.0,
+        15557971.0,
         15603327.0,
-        16096950.0,
+        16096951.0,
         16131657.0,
         16025273.0,
         16001252.0,
         15618028.0,
         15584179.0,
-        15596380.0,
-        15666941.0,
+        15596379.0,
+        15666940.0,
         15635207.0,
         15791204.0,
         15604857.0,
@@ -16182,76 +16495,76 @@ window.INITIAL_MARKET_DATA = {
         15572703.0,
         15629454.0,
         15631373.0,
-        16124416.0,
+        16124415.0,
         15890397.0,
         15911240.0,
         16167598.0,
-        15913854.0,
+        15913855.0,
         15993967.0,
         15798577.0,
-        15615227.0,
-        16101386.0,
+        15615226.0,
+        16101387.0,
         15978314.0,
-        15746322.0,
+        15746323.0,
         15941465.0,
         15526189.0,
         15878017.0,
         15568145.0,
         15773662.0,
         15473599.0,
-        15302695.0,
+        15302694.0,
         15183056.0,
         15739010.0,
         15740607.0,
-        15866667.0,
-        15909772.0,
-        16042480.0,
-        16411031.0,
+        15866668.0,
+        15909773.0,
+        16042479.0,
+        16411030.0,
         16270266.0,
         16261305.0,
         17542305.0,
-        17699264.0,
+        17699265.0,
         18826984.0,
-        20028530.0,
-        21411230.0,
+        20028529.0,
+        21411231.0,
         21513469.0,
-        21490067.0,
+        21490066.0,
         22051571.0,
         21817516.0,
-        22105708.0,
+        22105709.0,
         22023637.0,
         21771763.0,
         21814275.0,
         22340623.0,
-        22260984.0,
+        22260983.0,
         22127537.0,
-        22400181.0,
+        22400182.0,
         22602251.0,
         22053641.0,
         22559990.0,
         22627542.0,
-        22744695.0,
-        23205041.0,
-        23412165.0,
-        23143706.0,
+        22744694.0,
+        23205040.0,
+        23412166.0,
+        23143705.0,
         23140280.0,
         22875633.0,
         23413367.0,
         23309902.0,
-        23451598.0,
+        23451597.0,
         23908551.0,
-        23707261.0,
+        23707262.0,
         23853807.0,
         23880912.0,
-        24268568.0,
-        24450264.0,
-        24421990.0,
-        24302567.0,
+        24268569.0,
+        24450263.0,
+        24421991.0,
+        24302566.0,
         23436035.0,
         23927031.0,
         23390072.0,
-        22867899.0,
-        23348136.0,
+        22867900.0,
+        23348135.0,
         23365033.0,
         23788164.0,
         23535265.0,
@@ -16341,11 +16654,11 @@ window.INITIAL_MARKET_DATA = {
         23341754.0,
         22903634.0,
         22938853.0,
-        22916356.0,
-        22942729.0,
-        22509265.0,
-        22435300.0,
-        22363730.0
+        22915568.0,
+        22942075.0,
+        22508611.0,
+        22435169.0,
+        22536811.0
       ],
       "portfolio_index_usd": [
         100.0,
@@ -16597,9 +16910,9 @@ window.INITIAL_MARKET_DATA = {
         115.91,
         116.1,
         116.76,
-        114.42,
+        114.41,
         114.01,
-        114.01
+        114.89
       ],
       "portfolio_index_krw": [
         100.0,
@@ -16853,7 +17166,7 @@ window.INITIAL_MARKET_DATA = {
         107.66,
         105.63,
         105.28,
-        104.95
+        105.76
       ],
       "portfolio_return_series": [
         0.0,
@@ -17105,9 +17418,9 @@ window.INITIAL_MARKET_DATA = {
         15.91,
         16.1,
         16.76,
-        14.42,
+        14.41,
         14.01,
-        14.01
+        14.89
       ],
       "portfolio_return_series_usd": [
         0.0,
@@ -17359,9 +17672,9 @@ window.INITIAL_MARKET_DATA = {
         15.91,
         16.1,
         16.76,
-        14.42,
+        14.41,
         14.01,
-        14.01
+        14.89
       ],
       "portfolio_return_series_krw": [
         0.0,
@@ -17615,49 +17928,49 @@ window.INITIAL_MARKET_DATA = {
         7.66,
         5.63,
         5.28,
-        4.95
+        5.76
       ],
       "portfolio_metrics": {
-        "total_return_pct": 14.01,
-        "cagr_pct": 14.07,
-        "volatility_pct": 15.87,
-        "sharpe": 0.65,
-        "sortino": 0.94,
+        "total_return_pct": 14.89,
+        "cagr_pct": 14.95,
+        "volatility_pct": 15.88,
+        "sharpe": 0.7,
+        "sortino": 1.01,
         "mdd_pct": -8.72,
         "beta": 1.17,
-        "win_rate_pct": 51.8,
-        "profit_usd": 1702.1,
-        "profit_krw": 388343.0,
-        "raw_asset_change_usd": 8576.98,
-        "raw_asset_change_krw": 10384977.0
+        "win_rate_pct": 52.2,
+        "profit_usd": 1833.05,
+        "profit_krw": 561423.0,
+        "raw_asset_change_usd": 8707.93,
+        "raw_asset_change_krw": 10558058.0
       },
       "portfolio_metrics_usd": {
-        "total_return_pct": 14.01,
-        "cagr_pct": 14.07,
-        "volatility_pct": 15.87,
-        "sharpe": 0.65,
-        "sortino": 0.94,
+        "total_return_pct": 14.89,
+        "cagr_pct": 14.95,
+        "volatility_pct": 15.88,
+        "sharpe": 0.7,
+        "sortino": 1.01,
         "mdd_pct": -8.72,
         "beta": 1.17,
-        "win_rate_pct": 51.8,
-        "profit_usd": 1702.1,
-        "profit_krw": 388343.0,
-        "raw_asset_change_usd": 8576.98,
-        "raw_asset_change_krw": 10384977.0
+        "win_rate_pct": 52.2,
+        "profit_usd": 1833.05,
+        "profit_krw": 561423.0,
+        "raw_asset_change_usd": 8707.93,
+        "raw_asset_change_krw": 10558058.0
       },
       "portfolio_metrics_krw": {
-        "total_return_pct": 4.95,
-        "cagr_pct": 4.97,
+        "total_return_pct": 5.76,
+        "cagr_pct": 5.78,
         "volatility_pct": 19.58,
-        "sharpe": 0.13,
-        "sortino": 0.2,
-        "mdd_pct": -16.26,
+        "sharpe": 0.17,
+        "sortino": 0.26,
+        "mdd_pct": -15.99,
         "beta": 1.09,
-        "win_rate_pct": 49.0,
-        "profit_usd": 1702.1,
-        "profit_krw": 388343.0,
-        "raw_asset_change_usd": 8576.98,
-        "raw_asset_change_krw": 10384977.0
+        "win_rate_pct": 49.4,
+        "profit_usd": 1833.05,
+        "profit_krw": 561423.0,
+        "raw_asset_change_usd": 8707.93,
+        "raw_asset_change_krw": 10558058.0
       },
       "benchmark_series": {
         "BTC": [
@@ -18674,7 +18987,7 @@ window.INITIAL_MARKET_DATA = {
           73.05,
           61.3,
           62.15,
-          62.15
+          66.77
         ],
         "KOSPI200": [
           0.0,
@@ -19946,7 +20259,7 @@ window.INITIAL_MARKET_DATA = {
           73.05,
           61.3,
           62.15,
-          62.15
+          66.77
         ],
         "KOSPI200": [
           0.0,
@@ -21150,10 +21463,10 @@ window.INITIAL_MARKET_DATA = {
           86.07,
           82.12,
           83.99,
-          92.4,
+          92.39,
           94.0,
           91.97,
-          83.34,
+          83.33,
           77.63,
           69.85,
           59.47,
@@ -21218,7 +21531,7 @@ window.INITIAL_MARKET_DATA = {
           59.57,
           48.91,
           49.74,
-          49.27
+          53.52
         ],
         "KOSPI200": [
           0.0,
@@ -22490,7 +22803,7 @@ window.INITIAL_MARKET_DATA = {
           173.05,
           161.3,
           162.15,
-          162.15
+          166.77
         ],
         "KOSPI200": [
           100.0,
@@ -23694,10 +24007,10 @@ window.INITIAL_MARKET_DATA = {
           186.07,
           182.12,
           183.99,
-          192.4,
+          192.39,
           194.0,
           191.97,
-          183.34,
+          183.33,
           177.63,
           169.85,
           159.47,
@@ -23762,7 +24075,7 @@ window.INITIAL_MARKET_DATA = {
           159.57,
           148.91,
           149.74,
-          149.27
+          153.52
         ],
         "KOSPI200": [
           100.0,
@@ -24051,14 +24364,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 53.8
         },
         "SOXX": {
-          "total_return_pct": 62.15,
-          "cagr_pct": 62.46,
-          "volatility_pct": 46.43,
-          "sharpe": 1.19,
-          "sortino": 1.71,
+          "total_return_pct": 66.77,
+          "cagr_pct": 67.11,
+          "volatility_pct": 46.51,
+          "sharpe": 1.25,
+          "sortino": 1.79,
           "mdd_pct": -29.01,
-          "beta": 2.63,
-          "win_rate_pct": 59.4
+          "beta": 2.64,
+          "win_rate_pct": 59.8
         },
         "KOSPI200": {
           "total_return_pct": 70.76,
@@ -24103,14 +24416,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 53.8
         },
         "SOXX": {
-          "total_return_pct": 62.15,
-          "cagr_pct": 62.46,
-          "volatility_pct": 46.43,
-          "sharpe": 1.19,
-          "sortino": 1.71,
+          "total_return_pct": 66.77,
+          "cagr_pct": 67.11,
+          "volatility_pct": 46.51,
+          "sharpe": 1.25,
+          "sortino": 1.79,
           "mdd_pct": -29.01,
-          "beta": 2.63,
-          "win_rate_pct": 59.4
+          "beta": 2.64,
+          "win_rate_pct": 59.8
         },
         "KOSPI200": {
           "total_return_pct": 70.76,
@@ -24155,14 +24468,14 @@ window.INITIAL_MARKET_DATA = {
           "win_rate_pct": 50.6
         },
         "SOXX": {
-          "total_return_pct": 49.27,
-          "cagr_pct": 49.51,
-          "volatility_pct": 48.36,
-          "sharpe": 0.99,
-          "sortino": 1.44,
+          "total_return_pct": 53.52,
+          "cagr_pct": 53.78,
+          "volatility_pct": 48.41,
+          "sharpe": 1.05,
+          "sortino": 1.53,
           "mdd_pct": -37.09,
-          "beta": 1.96,
-          "win_rate_pct": 55.4
+          "beta": 1.97,
+          "win_rate_pct": 55.8
         },
         "KOSPI200": {
           "total_return_pct": 57.19,

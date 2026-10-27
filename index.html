@@ -444,9 +444,9 @@
 
         <div class="bg-slate-900/90 rounded-xl p-3.5 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 mt-3">
           <div class="space-y-1.5 text-xs">
-            <div class="text-slate-400">현재 접속 주소 (클릭하여 복사):</div>
+            <div class="text-slate-400">24시간 모바일/클라우드 접속 주소 (클릭하여 복사):</div>
             <button onclick="copyMobileUrl()" id="mobileUrlDisplay" class="text-sm font-mono font-bold text-cyan-400 bg-cyan-950/50 px-3 py-1.5 rounded-lg border border-cyan-500/30 hover:bg-cyan-900/50 transition">
-              http://127.0.0.1:8080
+              https://minwon0310.github.io/my-portfolio-pro/
             </button>
             <p class="text-[11px] text-slate-400 pt-1">
               • <strong>아이폰(Safari):</strong> 접속 후 하단 <span class="text-white">공유[↑] → '홈 화면에 추가'</span><br/>
@@ -454,7 +454,7 @@
             </p>
           </div>
           <div class="bg-white p-2 rounded-xl shrink-0">
-            <img id="mobileQrImg" src="" alt="Mobile QR Code" class="w-28 h-28" />
+            <img id="mobileQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fminwon0310.github.io%2Fmy-portfolio-pro%2F" alt="Mobile QR Code" class="w-28 h-28" />
           </div>
         </div>
       </div>
@@ -664,7 +664,7 @@
           }
         }
       } catch (e) {
-        const fallbackUrl = window.location.origin;
+        const fallbackUrl = 'https://minwon0310.github.io/my-portfolio-pro/';
         const urlEl = document.getElementById('mobileUrlDisplay');
         const qrEl = document.getElementById('mobileQrImg');
         if (urlEl) urlEl.textContent = fallbackUrl;

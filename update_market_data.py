@@ -292,50 +292,93 @@ def main():
         "1Y": max(0, n_len - 252),
     }
 
-    # Build time series & risk metrics per period for Portfolio + Benchmarks
+    # Build time series & risk metrics per period for Portfolio + Benchmarks (BOTH USD and KRW basis)
     periods_data = {}
-    snp_daily_ret_full = trading_df["^GSPC"].pct_change() if "^GSPC" in trading_df.columns else None
+    fx_series_full = trading_df["KRW=X"] if "KRW=X" in trading_df.columns else pd.Series(usdkrw, index=trading_df.index)
+    fx_series_full = fx_series_full.replace(0, usdkrw).ffill().bfill()
+
+    port_total_krw_series = port_total_series * fx_series_full
 
     for p_key, start_idx in period_indices.items():
         sub_df = trading_df.iloc[start_idx:]
-        sub_port = port_total_series.iloc[start_idx:]
-        sub_equity = port_equity_series.iloc[start_idx:]
+        sub_fx = fx_series_full.iloc[start_idx:]
+        sub_port_usd = port_total_series.iloc[start_idx:]
+        sub_port_krw = port_total_krw_series.iloc[start_idx:]
 
         dates_str = [d.strftime("%Y-%m-%d") for d in sub_df.index]
 
-        # Normalized % cumulative return series from start_idx = 0.0%
-        port_norm = ((sub_port / float(sub_port.iloc[0])) - 1.0) * 100.0
-        port_values_usd = [round(float(v), 2) for v in sub_port]
-        port_norm_list = [round(float(v), 2) for v in port_norm]
+        # 1) USD Basis Portfolio
+        port_norm_usd = ((sub_port_usd / float(sub_port_usd.iloc[0])) - 1.0) * 100.0
+        port_values_usd = [round(float(v), 2) for v in sub_port_usd]
+        port_norm_usd_list = [round(float(v), 2) for v in port_norm_usd]
 
-        port_daily_ret = sub_port.pct_change()
-        snp_sub_ret = sub_df["^GSPC"].pct_change() if "^GSPC" in sub_df.columns else None
-        port_metrics = calc_metrics(port_daily_ret, snp_sub_ret)
-        # Override total_return_pct with exact start-to-end return
-        port_metrics["total_return_pct"] = round(float(port_norm.iloc[-1]), 2)
-        port_metrics["profit_usd"] = round(float(sub_port.iloc[-1] - sub_port.iloc[0]), 2)
+        # 2) KRW Basis Portfolio (reflecting daily historical USD/KRW exchange rate)
+        port_norm_krw = ((sub_port_krw / float(sub_port_krw.iloc[0])) - 1.0) * 100.0
+        port_values_krw = [round(float(v), 0) for v in sub_port_krw]
+        port_norm_krw_list = [round(float(v), 2) for v in port_norm_krw]
 
-        bench_series = {}
-        bench_metrics = {}
+        snp_usd_series = sub_df["^GSPC"] if "^GSPC" in sub_df.columns else sub_port_usd
+        snp_krw_series = snp_usd_series * sub_fx
+
+        port_metrics_usd = calc_metrics(sub_port_usd.pct_change(), snp_usd_series.pct_change())
+        port_metrics_usd["total_return_pct"] = round(float(port_norm_usd.iloc[-1]), 2)
+        port_metrics_usd["profit_usd"] = round(float(sub_port_usd.iloc[-1] - sub_port_usd.iloc[0]), 2)
+        port_metrics_usd["profit_krw"] = round(float(sub_port_krw.iloc[-1] - sub_port_krw.iloc[0]), 0)
+
+        port_metrics_krw = calc_metrics(sub_port_krw.pct_change(), snp_krw_series.pct_change())
+        port_metrics_krw["total_return_pct"] = round(float(port_norm_krw.iloc[-1]), 2)
+        port_metrics_krw["profit_usd"] = round(float(sub_port_usd.iloc[-1] - sub_port_usd.iloc[0]), 2)
+        port_metrics_krw["profit_krw"] = round(float(sub_port_krw.iloc[-1] - sub_port_krw.iloc[0]), 0)
+
+        bench_series_usd = {}
+        bench_metrics_usd = {}
+        bench_series_krw = {}
+        bench_metrics_krw = {}
+
         for b in benchmarks:
             b_id = b["id"]
             b_tk = b["ticker"]
             if b_tk in sub_df.columns:
-                b_s = sub_df[b_tk]
-                b_norm = ((b_s / float(b_s.iloc[0])) - 1.0) * 100.0
-                bench_series[b_id] = [round(float(v), 2) for v in b_norm]
-                b_ret = b_s.pct_change()
-                m = calc_metrics(b_ret, snp_sub_ret)
-                m["total_return_pct"] = round(float(b_norm.iloc[-1]), 2)
-                bench_metrics[b_id] = m
+                raw_s = sub_df[b_tk]
+                is_krw_native = b_tk.endswith(".KS") or b_tk.endswith(".KQ")
+
+                if is_krw_native:
+                    # Native KRW asset (e.g. KOSPI 200): KRW series is raw, USD series divides by daily FX
+                    b_s_krw = raw_s
+                    b_s_usd = raw_s / sub_fx
+                else:
+                    # Native USD asset (BTC, S&P500, NDX, SOXX): USD series is raw, KRW series multiplies by daily FX
+                    b_s_usd = raw_s
+                    b_s_krw = raw_s * sub_fx
+
+                b_norm_usd = ((b_s_usd / float(b_s_usd.iloc[0])) - 1.0) * 100.0
+                bench_series_usd[b_id] = [round(float(v), 2) for v in b_norm_usd]
+                m_usd = calc_metrics(b_s_usd.pct_change(), snp_usd_series.pct_change())
+                m_usd["total_return_pct"] = round(float(b_norm_usd.iloc[-1]), 2)
+                bench_metrics_usd[b_id] = m_usd
+
+                b_norm_krw = ((b_s_krw / float(b_s_krw.iloc[0])) - 1.0) * 100.0
+                bench_series_krw[b_id] = [round(float(v), 2) for v in b_norm_krw]
+                m_krw = calc_metrics(b_s_krw.pct_change(), snp_krw_series.pct_change())
+                m_krw["total_return_pct"] = round(float(b_norm_krw.iloc[-1]), 2)
+                bench_metrics_krw[b_id] = m_krw
 
         periods_data[p_key] = {
             "dates": dates_str,
             "portfolio_values_usd": port_values_usd,
-            "portfolio_return_series": port_norm_list,
-            "portfolio_metrics": port_metrics,
-            "benchmark_series": bench_series,
-            "benchmark_metrics": bench_metrics,
+            "portfolio_values_krw": port_values_krw,
+            "portfolio_return_series": port_norm_usd_list,
+            "portfolio_return_series_usd": port_norm_usd_list,
+            "portfolio_return_series_krw": port_norm_krw_list,
+            "portfolio_metrics": port_metrics_usd,
+            "portfolio_metrics_usd": port_metrics_usd,
+            "portfolio_metrics_krw": port_metrics_krw,
+            "benchmark_series": bench_series_usd,
+            "benchmark_series_usd": bench_series_usd,
+            "benchmark_series_krw": bench_series_krw,
+            "benchmark_metrics": bench_metrics_usd,
+            "benchmark_metrics_usd": bench_metrics_usd,
+            "benchmark_metrics_krw": bench_metrics_krw,
         }
 
     # Monthly Dividend Breakdown (1~12월)

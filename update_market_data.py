@@ -80,12 +80,16 @@ def main():
     holdings = config["holdings"]
     benchmarks = config["benchmarks"]
     accounts = config["accounts"]
+    transactions = config.get("transactions", [])
+    actual_div_history = config.get("actual_dividend_history", [])
 
     holding_tickers = sorted(list(set(h["ticker"] for h in holdings)))
+    tx_tickers = sorted(list(set(tx["ticker"] for tx in transactions if tx.get("ticker") and tx["ticker"] != "USD")))
     # Note: State Street renamed SPLG to SPYM in Yahoo Finance. Map SPLG -> SPYM for Yahoo queries.
     YF_TICKER_MAP = {"SPLG": "SPYM"}
     benchmark_tickers = [b["ticker"] for b in benchmarks]
-    yf_holding_tickers = [YF_TICKER_MAP.get(t, t) for t in holding_tickers]
+    combined_equity_tickers = sorted(list(set(holding_tickers + tx_tickers)))
+    yf_holding_tickers = [YF_TICKER_MAP.get(t, t) for t in combined_equity_tickers]
     all_yf_tickers = sorted(list(set(yf_holding_tickers + benchmark_tickers + ["KRW=X"])))
 
     print(f"Fetching market data for {len(all_yf_tickers)} tickers: {all_yf_tickers}")
@@ -102,7 +106,7 @@ def main():
         if yf_t in close_df.columns:
             close_df[orig_t] = close_df[yf_t]
 
-    all_tickers = sorted(list(set(holding_tickers + benchmark_tickers + ["KRW=X"])))
+    all_tickers = sorted(list(set(combined_equity_tickers + benchmark_tickers + ["KRW=X"])))
 
     # Forward fill missing values across different market holidays (US vs KR vs Crypto)
     close_df = close_df.ffill().bfill()
@@ -214,15 +218,153 @@ def main():
 
     total_cash_usd = sum(float(a["cash_usd"]) for a in accounts)
 
-    # Compute daily portfolio market value (equities + cash)
-    port_equity_series = pd.Series(0.0, index=trading_df.index)
+    # -------------------------------------------------------------------------
+    # RECONSTRUCT ACTUAL DAILY HOLDINGS & NAV INDEX FROM TRANSACTION LEDGER
+    # -------------------------------------------------------------------------
+    # Final target shares as of today (from current holdings config)
+    final_shares_by_ticker = {}
     for h in holdings:
-        t = h["ticker"]
-        shares = float(h["shares"])
-        if t in trading_df.columns:
-            port_equity_series += trading_df[t] * shares
+        tk = h["ticker"]
+        final_shares_by_ticker[tk] = final_shares_by_ticker.get(tk, 0.0) + float(h["shares"])
 
-    port_total_series = port_equity_series + total_cash_usd
+    # Sort transactions chronologically
+    sorted_tx = sorted(transactions, key=lambda x: x["date"])
+
+    # Walk backward from final state to reconstruct exact shares & cash on each trading day
+    dates_list = [d.strftime("%Y-%m-%d") for d in trading_df.index]
+    first_date_str = dates_list[0]
+
+    # Group transactions that occurred AFTER each trading day
+    # Easier and exact: compute initial state before first_date_str by subtracting all net changes on/after first_date_str from final state!
+    net_share_changes_since_start = {}
+    net_cash_changes_since_start = 0.0
+
+    for tx in sorted_tx:
+        if tx["date"] > first_date_str:
+            ttype = tx["type"]
+            tk = tx["ticker"]
+            sh = float(tx.get("shares", 0.0))
+            amt = float(tx.get("amount_usd", 0.0))
+            if ttype == "BUY":
+                net_share_changes_since_start[tk] = net_share_changes_since_start.get(tk, 0.0) + sh
+                net_cash_changes_since_start -= amt
+            elif ttype == "SELL":
+                net_share_changes_since_start[tk] = net_share_changes_since_start.get(tk, 0.0) - sh
+                net_cash_changes_since_start += amt
+            elif ttype == "DEPOSIT":
+                net_cash_changes_since_start += amt
+            elif ttype == "WITHDRAW":
+                net_cash_changes_since_start -= amt
+
+    for dv in actual_div_history:
+        if dv["date"] > first_date_str:
+            net_cash_changes_since_start += float(dv.get("amount_usd", 0.0))
+
+    # Initial state on first_date_str
+    cur_shares = {}
+    for tk in set(list(final_shares_by_ticker.keys()) + list(net_share_changes_since_start.keys())):
+        init_sh = final_shares_by_ticker.get(tk, 0.0) - net_share_changes_since_start.get(tk, 0.0)
+        cur_shares[tk] = max(0.0, round(init_sh, 6))
+
+    cur_cash = max(20.0, total_cash_usd - net_cash_changes_since_start)
+
+    # Index transactions and dividends by date string
+    from collections import defaultdict
+    tx_by_date = defaultdict(list)
+    for tx in sorted_tx:
+        if tx["date"] > first_date_str:
+            tx_by_date[tx["date"]].append(tx)
+
+    div_by_date = defaultdict(float)
+    for dv in actual_div_history:
+        if dv["date"] > first_date_str:
+            div_by_date[dv["date"]] += float(dv.get("amount_usd", 0.0))
+
+    # Step forward day-by-day across trading_df.index (including non-trading days in between)
+    port_equity_vals = []
+    port_total_vals = []
+    port_cash_vals = []
+    daily_ext_flows = []  # External DEPOSIT/WITHDRAW flows on each trading step
+    daily_trade_markers = []  # Summary of BUY/SELL events per trading date for chart markers
+
+    prev_dt_str = first_date_str
+    for idx_i, dt_obj in enumerate(trading_df.index):
+        dt_str = dt_obj.strftime("%Y-%m-%d")
+        ext_flow_usd = 0.0
+        day_events = []
+
+        if idx_i > 0:
+            # Apply all transactions withprev_dt_str < tx_date <= dt_str
+            for tx in sorted_tx:
+                if prev_dt_str < tx["date"] <= dt_str:
+                    ttype = tx["type"]
+                    tk = tx["ticker"]
+                    sh = float(tx.get("shares", 0.0))
+                    amt = float(tx.get("amount_usd", 0.0))
+                    if ttype == "BUY":
+                        cur_shares[tk] = round(cur_shares.get(tk, 0.0) + sh, 6)
+                        cur_cash -= amt
+                        day_events.append({"type": "BUY", "ticker": tk, "shares": sh, "amount_usd": amt, "price_usd": tx.get("price_usd", 0), "account": tx.get("account", "")})
+                    elif ttype == "SELL":
+                        cur_shares[tk] = max(0.0, round(cur_shares.get(tk, 0.0) - sh, 6))
+                        cur_cash += amt
+                        day_events.append({"type": "SELL", "ticker": tk, "shares": sh, "amount_usd": amt, "price_usd": tx.get("price_usd", 0), "account": tx.get("account", "")})
+                    elif ttype == "DEPOSIT":
+                        cur_cash += amt
+                        ext_flow_usd += amt
+                        day_events.append({"type": "DEPOSIT", "ticker": "USD", "shares": 0, "amount_usd": amt, "account": tx.get("account", "")})
+                    elif ttype == "WITHDRAW":
+                        cur_cash -= amt
+                        ext_flow_usd -= amt
+
+            for dv in actual_div_history:
+                if prev_dt_str < dv["date"] <= dt_str:
+                    cur_cash += float(dv.get("amount_usd", 0.0))
+
+        # On the very last day, snap exactly to current holdings & total_cash_usd
+        if idx_i == len(trading_df.index) - 1:
+            cur_shares = dict(final_shares_by_ticker)
+            cur_cash = total_cash_usd
+
+        eq_val = 0.0
+        for tk, sh in cur_shares.items():
+            if sh > 0 and tk in trading_df.columns:
+                px = float(trading_df.loc[dt_obj, tk])
+                if not math.isnan(px):
+                    eq_val += px * sh
+
+        eff_cash = max(0.0, cur_cash)
+        tot_val = eq_val + eff_cash
+
+        port_equity_vals.append(eq_val)
+        port_cash_vals.append(eff_cash)
+        port_total_vals.append(tot_val)
+        daily_ext_flows.append(ext_flow_usd)
+        daily_trade_markers.append(day_events)
+        prev_dt_str = dt_str
+
+    port_equity_series = pd.Series(port_equity_vals, index=trading_df.index)
+    port_total_series = pd.Series(port_total_vals, index=trading_df.index)
+    ext_flow_series = pd.Series(daily_ext_flows, index=trading_df.index)
+
+    # Compute Time-Weighted Return (TWR) Daily Return & NAV Index (Base 100.0)
+    # r_t = (V_t - ExtFlow_t - V_{t-1}) / V_{t-1}
+    twr_daily_ret_usd = [0.0]
+    twr_nav_usd = [100.0]
+    for i in range(1, len(port_total_vals)):
+        v_prev = port_total_vals[i - 1]
+        v_curr = port_total_vals[i]
+        flow = daily_ext_flows[i]
+        if v_prev > 1.0:
+            r = (v_curr - flow - v_prev) / v_prev
+            # Clamp extreme artificial jumps if any
+            r = max(-0.25, min(0.25, r))
+        else:
+            r = 0.0
+        twr_daily_ret_usd.append(r)
+        twr_nav_usd.append(twr_nav_usd[-1] * (1.0 + r))
+
+    twr_nav_usd_series = pd.Series(twr_nav_usd, index=trading_df.index)
 
     # Enrich holdings with live market values, weights, dividend estimates
     enriched_holdings = []
@@ -293,46 +435,67 @@ def main():
     }
 
     # Build time series & risk metrics per period for Portfolio + Benchmarks (BOTH USD and KRW basis)
+    # Using Time-Weighted Return (TWR) NAV Index so external deposits don't artificially spike % return or Sharpe/Sortino,
+    # while portfolio_values_usd / portfolio_values_krw reflect actual asset size changes from deposits, buys, and sells!
     periods_data = {}
     fx_series_full = trading_df["KRW=X"] if "KRW=X" in trading_df.columns else pd.Series(usdkrw, index=trading_df.index)
     fx_series_full = fx_series_full.replace(0, usdkrw).ffill().bfill()
 
     port_total_krw_series = port_total_series * fx_series_full
+    # KRW TWR NAV Index = USD TWR NAV Index * (FX_t / FX_0)
+    twr_nav_krw_series = twr_nav_usd_series * (fx_series_full / float(fx_series_full.iloc[0]))
 
     for p_key, start_idx in period_indices.items():
         sub_df = trading_df.iloc[start_idx:]
         sub_fx = fx_series_full.iloc[start_idx:]
         sub_port_usd = port_total_series.iloc[start_idx:]
         sub_port_krw = port_total_krw_series.iloc[start_idx:]
+        sub_nav_usd = twr_nav_usd_series.iloc[start_idx:]
+        sub_nav_krw = twr_nav_krw_series.iloc[start_idx:]
+        sub_ext_usd = ext_flow_series.iloc[start_idx:]
+        sub_markers = daily_trade_markers[start_idx:]
 
         dates_str = [d.strftime("%Y-%m-%d") for d in sub_df.index]
 
-        # 1) USD Basis Portfolio
-        port_norm_usd = ((sub_port_usd / float(sub_port_usd.iloc[0])) - 1.0) * 100.0
+        # 1) USD Basis Portfolio (Indexed to 100.0 at period start, and % return = Index - 100)
+        port_index_usd = (sub_nav_usd / float(sub_nav_usd.iloc[0])) * 100.0
+        port_norm_usd = port_index_usd - 100.0
         port_values_usd = [round(float(v), 2) for v in sub_port_usd]
+        port_index_usd_list = [round(float(v), 2) for v in port_index_usd]
         port_norm_usd_list = [round(float(v), 2) for v in port_norm_usd]
 
-        # 2) KRW Basis Portfolio (reflecting daily historical USD/KRW exchange rate)
-        port_norm_krw = ((sub_port_krw / float(sub_port_krw.iloc[0])) - 1.0) * 100.0
+        # 2) KRW Basis Portfolio (Indexed to 100.0 at period start, reflecting daily historical USD/KRW exchange rate)
+        port_index_krw = (sub_nav_krw / float(sub_nav_krw.iloc[0])) * 100.0
+        port_norm_krw = port_index_krw - 100.0
         port_values_krw = [round(float(v), 0) for v in sub_port_krw]
+        port_index_krw_list = [round(float(v), 2) for v in port_index_krw]
         port_norm_krw_list = [round(float(v), 2) for v in port_norm_krw]
 
-        snp_usd_series = sub_df["^GSPC"] if "^GSPC" in sub_df.columns else sub_port_usd
+        snp_usd_series = sub_df["^GSPC"] if "^GSPC" in sub_df.columns else sub_nav_usd
         snp_krw_series = snp_usd_series * sub_fx
 
-        port_metrics_usd = calc_metrics(sub_port_usd.pct_change(), snp_usd_series.pct_change())
+        # Calculate Sharpe, Sortino, MDD, Volatility, Beta from TWR NAV daily returns!
+        port_metrics_usd = calc_metrics(sub_nav_usd.pct_change(), snp_usd_series.pct_change())
         port_metrics_usd["total_return_pct"] = round(float(port_norm_usd.iloc[-1]), 2)
-        port_metrics_usd["profit_usd"] = round(float(sub_port_usd.iloc[-1] - sub_port_usd.iloc[0]), 2)
-        port_metrics_usd["profit_krw"] = round(float(sub_port_krw.iloc[-1] - sub_port_krw.iloc[0]), 0)
+        net_ext_usd = float(sub_ext_usd.iloc[1:].sum()) if len(sub_ext_usd) > 1 else 0.0
+        net_ext_krw = float((sub_ext_usd.iloc[1:] * sub_fx.iloc[1:]).sum()) if len(sub_ext_usd) > 1 else 0.0
+        port_metrics_usd["profit_usd"] = round(float(sub_port_usd.iloc[-1] - sub_port_usd.iloc[0] - net_ext_usd), 2)
+        port_metrics_usd["profit_krw"] = round(float(sub_port_krw.iloc[-1] - sub_port_krw.iloc[0] - net_ext_krw), 0)
+        port_metrics_usd["raw_asset_change_usd"] = round(float(sub_port_usd.iloc[-1] - sub_port_usd.iloc[0]), 2)
+        port_metrics_usd["raw_asset_change_krw"] = round(float(sub_port_krw.iloc[-1] - sub_port_krw.iloc[0]), 0)
 
-        port_metrics_krw = calc_metrics(sub_port_krw.pct_change(), snp_krw_series.pct_change())
+        port_metrics_krw = calc_metrics(sub_nav_krw.pct_change(), snp_krw_series.pct_change())
         port_metrics_krw["total_return_pct"] = round(float(port_norm_krw.iloc[-1]), 2)
-        port_metrics_krw["profit_usd"] = round(float(sub_port_usd.iloc[-1] - sub_port_usd.iloc[0]), 2)
-        port_metrics_krw["profit_krw"] = round(float(sub_port_krw.iloc[-1] - sub_port_krw.iloc[0]), 0)
+        port_metrics_krw["profit_usd"] = port_metrics_usd["profit_usd"]
+        port_metrics_krw["profit_krw"] = port_metrics_usd["profit_krw"]
+        port_metrics_krw["raw_asset_change_usd"] = port_metrics_usd["raw_asset_change_usd"]
+        port_metrics_krw["raw_asset_change_krw"] = port_metrics_usd["raw_asset_change_krw"]
 
         bench_series_usd = {}
+        bench_index_usd = {}
         bench_metrics_usd = {}
         bench_series_krw = {}
+        bench_index_krw = {}
         bench_metrics_krw = {}
 
         for b in benchmarks:
@@ -343,21 +506,23 @@ def main():
                 is_krw_native = b_tk.endswith(".KS") or b_tk.endswith(".KQ")
 
                 if is_krw_native:
-                    # Native KRW asset (e.g. KOSPI 200): KRW series is raw, USD series divides by daily FX
                     b_s_krw = raw_s
                     b_s_usd = raw_s / sub_fx
                 else:
-                    # Native USD asset (BTC, S&P500, NDX, SOXX): USD series is raw, KRW series multiplies by daily FX
                     b_s_usd = raw_s
                     b_s_krw = raw_s * sub_fx
 
-                b_norm_usd = ((b_s_usd / float(b_s_usd.iloc[0])) - 1.0) * 100.0
+                b_idx_usd = (b_s_usd / float(b_s_usd.iloc[0])) * 100.0
+                b_norm_usd = b_idx_usd - 100.0
+                bench_index_usd[b_id] = [round(float(v), 2) for v in b_idx_usd]
                 bench_series_usd[b_id] = [round(float(v), 2) for v in b_norm_usd]
                 m_usd = calc_metrics(b_s_usd.pct_change(), snp_usd_series.pct_change())
                 m_usd["total_return_pct"] = round(float(b_norm_usd.iloc[-1]), 2)
                 bench_metrics_usd[b_id] = m_usd
 
-                b_norm_krw = ((b_s_krw / float(b_s_krw.iloc[0])) - 1.0) * 100.0
+                b_idx_krw = (b_s_krw / float(b_s_krw.iloc[0])) * 100.0
+                b_norm_krw = b_idx_krw - 100.0
+                bench_index_krw[b_id] = [round(float(v), 2) for v in b_idx_krw]
                 bench_series_krw[b_id] = [round(float(v), 2) for v in b_norm_krw]
                 m_krw = calc_metrics(b_s_krw.pct_change(), snp_krw_series.pct_change())
                 m_krw["total_return_pct"] = round(float(b_norm_krw.iloc[-1]), 2)
@@ -365,8 +530,11 @@ def main():
 
         periods_data[p_key] = {
             "dates": dates_str,
+            "trade_markers": sub_markers,
             "portfolio_values_usd": port_values_usd,
             "portfolio_values_krw": port_values_krw,
+            "portfolio_index_usd": port_index_usd_list,
+            "portfolio_index_krw": port_index_krw_list,
             "portfolio_return_series": port_norm_usd_list,
             "portfolio_return_series_usd": port_norm_usd_list,
             "portfolio_return_series_krw": port_norm_krw_list,
@@ -376,6 +544,8 @@ def main():
             "benchmark_series": bench_series_usd,
             "benchmark_series_usd": bench_series_usd,
             "benchmark_series_krw": bench_series_krw,
+            "benchmark_index_usd": bench_index_usd,
+            "benchmark_index_krw": bench_index_krw,
             "benchmark_metrics": bench_metrics_usd,
             "benchmark_metrics_usd": bench_metrics_usd,
             "benchmark_metrics_krw": bench_metrics_krw,
@@ -434,6 +604,7 @@ def main():
         "monthly_dividends_usd": monthly_dividends_usd,
         "monthly_dividend_details": monthly_dividend_details,
         "actual_dividend_history": actual_div_history,
+        "transactions": sorted_tx,
         "periods": periods_data,
     }
 
